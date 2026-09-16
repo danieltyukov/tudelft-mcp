@@ -10,9 +10,11 @@ Commands
   login [--fresh] [--only osiris,timetable]   Sign in once in a browser window (Brightspace, OSIRIS, MyTimetable)
   status                                       Show which services are connected and verify them live
   logout                                       Remove saved sessions and the browser profile
-  serve [--http] [--port N] [--host H]         Run the MCP server (stdio by default)
-        [--tunnel]                             With --http: expose it publicly through cloudflared for ChatGPT
-  setup [client...] [--all] [--dry-run]        Write MCP config for installed clients (claude, cursor, codex, ...)
+  serve [--http] [--port N] [--host H]         Run the MCP server (stdio by default; --http listens on 127.0.0.1:3847)
+        [--token T] [--show-token]             With --http: use this bearer token; print the token that is in use
+        [--tunnel]                             With --http: expose it publicly through cloudflared or ngrok for ChatGPT
+  setup [client...] [--all] [--dry-run]        Write MCP config for installed clients (claude-desktop, cursor, codex, ...)
+        [--json] [--command npx|node]          Machine-readable summary; how clients start the server (default: auto)
   tools                                        List the tools this server exposes
   browser [install|which]                      Download Chromium, or show the browser that will be used
   doctor                                       Alias for status
