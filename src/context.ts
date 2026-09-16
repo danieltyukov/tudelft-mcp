@@ -73,6 +73,11 @@ export function createContext(config: Config = loadConfig()): AppContext {
     }
   };
 
+  browser.cookieSeed = async () => {
+    const data = await session.load();
+    return [...(data.brightspace?.cookies ?? []), ...(data.osiris?.cookies ?? [])];
+  };
+
   const brightspace = new BrightspaceClient(config, session, renewBrightspace);
 
   const ctx: AppContext = {

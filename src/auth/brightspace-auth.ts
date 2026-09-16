@@ -159,14 +159,29 @@ export async function captureBrightspace(
   const material = await page
     .evaluate(() => {
       let xsrf: string | undefined;
-      try {
-        const raw = localStorage.getItem('XSRF.Token');
-        if (raw) xsrf = JSON.parse(raw) as string;
-      } catch {
-        /* optional */
+      const raw = localStorage.getItem('XSRF.Token');
+      if (raw) {
+        try {
+          const parsed: unknown = JSON.parse(raw);
+          xsrf = typeof parsed === 'string' ? parsed : undefined;
+        } catch {
+          xsrf = raw;
+        }
       }
-      xsrf ??= document.querySelector('meta[name="d2l-xsrf-token"]')?.getAttribute('content') ?? undefined;
-      return { xsrf: typeof xsrf === 'string' ? xsrf : undefined };
+      if (!xsrf) {
+        const d2l = (
+          window as unknown as {
+            D2L?: { LP?: { Web?: { Authentication?: { Xsrf?: { GetXsrfToken?: () => string } } } } };
+          }
+        ).D2L;
+        try {
+          xsrf = d2l?.LP?.Web?.Authentication?.Xsrf?.GetXsrfToken?.();
+        } catch {
+          /* optional */
+        }
+      }
+      xsrf ||= document.querySelector('meta[name="d2l-xsrf-token"]')?.getAttribute('content') ?? undefined;
+      return { xsrf: typeof xsrf === 'string' && xsrf.trim() ? xsrf.trim() : undefined };
     })
     .catch(() => ({ xsrf: undefined as string | undefined }));
   const bearer = await mintBearer(context, origin, material.xsrf, config.timeoutMs);
@@ -188,7 +203,9 @@ export async function captureBrightspace(
       'AUTH_REQUIRED',
       'Brightspace signed in, but the account could not be verified through its API. Try again.',
     );
-  const cookies = (await context.cookies(origin)).map(toCookie);
+  // Keep every domain: the IdP and SURFconext cookies are session cookies that Chrome
+  // drops on exit, so they are seeded back into later headless launches from here.
+  const cookies = (await context.cookies()).map(toCookie);
   const session: BrightspaceSession = { origin, cookies, identity, savedAt: new Date().toISOString() };
   if (material.xsrf) session.xsrf = material.xsrf;
   if (bearer) session.bearer = bearer;

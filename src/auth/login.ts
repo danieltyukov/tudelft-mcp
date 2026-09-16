@@ -39,7 +39,7 @@ export async function runLogin(ctx: AppContext, options: LoginOptions, log: Logg
     services: {},
     finishedAt: '',
   };
-  await ctx.browser.withContext({ headless: false }, async (context) => {
+  await ctx.browser.withContext({ headless: false, seed: !options.fresh }, async (context) => {
     const page = context.pages()[0] ?? (await context.newPage());
     log(
       `Opening ${config.brightspaceUrl} in ${ctx.browser.describe()?.name ?? 'the browser'}. Finish the TU Delft sign-in there (${Math.round(timeoutMs / 60_000)} minutes).`,

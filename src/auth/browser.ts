@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { chromium, type BrowserContext } from 'playwright-core';
 import type { Config } from '../config.js';
 import { TudelftError } from '../errors.js';
+import type { Cookie } from './session.js';
 
 export interface BrowserInfo {
   name: string;
@@ -138,6 +139,22 @@ export function findBrowser(
 
 export interface LaunchOptions {
   headless: boolean;
+  /** Seed saved cookies into the fresh context (default true). Off for a clean login. */
+  seed?: boolean;
+}
+
+/** Merge cookie lists (later wins) and drop expired ones, ready for context.addCookies. */
+export function seedableCookies(...lists: Cookie[][]): Cookie[] {
+  const now = Date.now() / 1000;
+  const merged = new Map<string, Cookie>();
+  for (const list of lists) {
+    for (const cookie of list) {
+      if (cookie.expires > 0 && cookie.expires < now) continue;
+      if (!cookie.name || !cookie.domain) continue;
+      merged.set(`${cookie.domain}|${cookie.path}|${cookie.name}`, cookie);
+    }
+  }
+  return [...merged.values()];
 }
 
 /**
@@ -147,6 +164,8 @@ export interface LaunchOptions {
 export class BrowserManager {
   private queue: Promise<unknown> = Promise.resolve();
   private active?: { headless: boolean; context: BrowserContext };
+  /** Supplies saved cookies to seed into new contexts; set by the app context. */
+  cookieSeed?: () => Promise<Cookie[]>;
 
   constructor(private readonly config: Config) {}
 
@@ -189,6 +208,10 @@ export class BrowserManager {
       });
       this.active = { headless: options.headless, context };
       try {
+        if (options.seed !== false && this.cookieSeed) {
+          const cookies = seedableCookies(await this.cookieSeed());
+          if (cookies.length) await context.addCookies(cookies).catch(() => undefined);
+        }
         return await task(context);
       } finally {
         this.active = undefined;

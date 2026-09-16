@@ -111,7 +111,7 @@ export function registerContentTools(reg: ToolRegistry, _ctx: AppContext): void 
       title: 'Read a Brightspace page',
       description:
         'Load a brightspace.tudelft.nl page in the signed-in headless browser and return its visible text and links. For content the API does not expose. Action URLs are refused.',
-      input: { url: z.string().url(), maxChars: z.number().int().min(500).max(100_000).default(30_000) },
+      input: { url: z.string().url(), maxChars: z.number().int().min(100).max(100_000).default(30_000) },
       annotations: READ,
     },
     async (args, ctx) => readPage(ctx, args.url, args.maxChars),

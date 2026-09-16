@@ -87,3 +87,18 @@ describe('cookieHeader', () => {
     expect(cookieHeader(session.cookies, new URL('https://engine.surfconext.nl/x'))).toBe('surf=y');
   });
 });
+
+describe('seedableCookies', () => {
+  it('merges lists with later entries winning and drops expired cookies', async () => {
+    const { seedableCookies } = await import('../../src/auth/browser.js');
+    const base = { path: '/', httpOnly: true, secure: true };
+    const result = seedableCookies(
+      [
+        { name: 'a', value: '1', domain: 'x.nl', expires: -1, ...base },
+        { name: 'old', value: '1', domain: 'x.nl', expires: 1, ...base },
+      ],
+      [{ name: 'a', value: '2', domain: 'x.nl', expires: -1, ...base }],
+    );
+    expect(result).toEqual([{ name: 'a', value: '2', domain: 'x.nl', expires: -1, ...base }]);
+  });
+});
