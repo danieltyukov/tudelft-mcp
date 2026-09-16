@@ -49,7 +49,7 @@ describe('JSON clients', () => {
 
     const result = await desktop.write(entry, { dryRun: false });
     expect(result.changed).toBe(true);
-    expect(result.backup).toBe(`${path}.bak`);
+    expect(norm(result.backup ?? '')).toBe(norm(`${path}.bak`));
     expect(result.manual).toBeUndefined();
     const doc = await readJson(path);
     expect(doc.theme).toBe('dark');
@@ -207,7 +207,7 @@ describe('Codex TOML', () => {
     );
     const second = await codex.write({ command: 'tudelft-mcp', args: ['serve'] }, { dryRun: false });
     expect(second.changed).toBe(true);
-    expect(second.backup).toBe(`${path}.bak`);
+    expect(norm(second.backup ?? '')).toBe(norm(`${path}.bak`));
     expect(await readFile(path, 'utf8')).toBe(
       [
         '[mcp_servers.tudelft]',
