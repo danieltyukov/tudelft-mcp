@@ -1,6 +1,6 @@
 {
   "name": "tudelft-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server for TU Delft students: Brightspace, OSIRIS (my.tudelft.nl), MyTimetable and the public Study Guide, for Claude, ChatGPT, Cursor, Codex and any other MCP client.",
   "type": "module",
   "license": "MIT",

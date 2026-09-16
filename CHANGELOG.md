@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-16
+
+### Fixed
+
+- Silent session renewal: cookies for every sign-in domain are captured and seeded into headless launches, the persistent Brightspace `ShibbolethSSO` cookie is cleared before each sign-in so SURFconext no longer reports "session lost", the headed user agent is reused headless, and a 403 from Brightspace is checked against the current-user endpoint before it is treated as a permission denial.
+- The XSRF token is read whether Brightspace stores it as JSON or a plain string, so write actions have the header they need.
+- Node 20 support for PDF extraction and Windows path handling in the setup command.
+- `TUDELFT_MCP_DEBUG=1` prints sign-in hops and renewal failures to stderr.
+
 ## [0.1.0] - 2026-09-16
 
 ### Added
@@ -28,5 +37,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Static site, README, contributor documentation, generated tool reference (`npm run docs:tools`).
 - CI on Ubuntu, macOS and Windows with Node 20 and 22; release, Pages and CodeQL workflows.
 
-[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/danieltyukov/tudelft-mcp/releases/tag/v0.1.0
