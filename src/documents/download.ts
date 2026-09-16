@@ -1,11 +1,11 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
-import { basename, join } from 'node:path';
+import { join } from 'node:path';
 import { TudelftError } from '../errors.js';
 
 /** A filename safe on every platform: no path separators, control characters or reserved names. */
 export function safeFilename(input: string): string {
-  const name = basename(input.replace(/\\/g, '/'))
+  const name = (input.split(/[\\/]/).pop() ?? '')
     .normalize('NFC')
     // eslint-disable-next-line no-control-regex
     .replace(/[<>:"/\\|?*\x00-\x1f\x7f]/g, '_')

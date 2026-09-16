@@ -1,7 +1,20 @@
 // @ts-check
 // Plain JavaScript so Node can start this worker without a TypeScript loader.
 import { parentPort, workerData } from 'node:worker_threads';
-import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
+
+// pdfjs uses Promise.withResolvers, which Node 20 does not have.
+const PromiseCtor = /** @type {PromiseConstructor & { withResolvers?: unknown }} */ (Promise);
+if (typeof PromiseCtor.withResolvers !== 'function') {
+  PromiseCtor.withResolvers = function withResolvers() {
+    let resolve;
+    let reject;
+    const promise = new Promise((res, rej) => {
+      resolve = res;
+      reject = rej;
+    });
+    return { promise, resolve, reject };
+  };
+}
 
 // Extraction runs on bytes that are already downloaded; PDFs must not trigger network access.
 globalThis.fetch = async () => {
@@ -17,6 +30,7 @@ globalThis.fetch = async () => {
  */
 async function extract() {
   const { bytes, maxPages, maxTextLength } = /** @type {Input} */ (workerData);
+  const { getDocument } = await import('pdfjs-dist/legacy/build/pdf.mjs');
   const task = getDocument({
     data: bytes,
     useSystemFonts: false,

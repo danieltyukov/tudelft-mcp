@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import { isAbsolute, resolve } from 'node:path';
 import { defaultSetupEnv, findOnPath, type SetupEnv } from './paths.js';
 
 /** How an MCP client should start this server. */
@@ -34,9 +34,10 @@ export function isGlobalInstall(entry: string): boolean {
 export function serverCommand(options: CommandOptions = {}): ServerEntry {
   const mode = options.mode ?? 'auto';
   if (mode === 'npx') return { command: 'npx', args: ['-y', 'tudelft-mcp', 'serve'] };
-  let entry = resolve(options.entry ?? process.argv[1] ?? 'dist/cli.js');
+  const given = options.entry ?? process.argv[1] ?? 'dist/cli.js';
+  let entry = isAbsolute(given) ? given : resolve(given);
   // Running from source through tsx: clients need the built entry point instead.
-  if (/[\\/]src[\\/]cli\.ts$/.test(entry)) entry = resolve(entry, '..', '..', 'dist', 'cli.js');
+  entry = entry.replace(/([\\/])src[\\/]cli\.ts$/, '$1dist$1cli.js');
   const setup = options.setup ?? defaultSetupEnv();
   if (mode === 'auto' && (isGlobalInstall(entry) || findOnPath('tudelft-mcp', setup))) {
     return { command: 'tudelft-mcp', args: ['serve'] };

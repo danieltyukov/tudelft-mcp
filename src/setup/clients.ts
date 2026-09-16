@@ -1,9 +1,17 @@
 import { spawn } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
 import type { ServerEntry } from './command.js';
 import { mergeJsonFile, mergeTomlSection, readText, type FileChange } from './files.js';
-import { appDataDir, dotConfigDir, findOnPath, homeDir, isDir, isFile, type SetupEnv } from './paths.js';
+import {
+  appDataDir,
+  dotConfigDir,
+  findOnPath,
+  homeDir,
+  isDir,
+  isFile,
+  pathJoin,
+  type SetupEnv,
+} from './paths.js';
 
 export interface Detection {
   installed: boolean;
@@ -78,7 +86,7 @@ function runCommand(binary: string, args: string[]): Promise<boolean> {
 }
 
 function claudeCode(setup: SetupEnv): ClientDefinition {
-  const configPath = join(homeDir(setup), '.claude.json');
+  const configPath = pathJoin(setup, homeDir(setup), '.claude.json');
   const binary = findOnPath('claude', setup);
   return {
     id: 'claude-code',
@@ -128,8 +136,8 @@ export function codexSection(entry: ServerEntry): string {
 }
 
 function codex(setup: SetupEnv): ClientDefinition {
-  const dir = join(homeDir(setup), '.codex');
-  const configPath = join(dir, 'config.toml');
+  const dir = pathJoin(setup, homeDir(setup), '.codex');
+  const configPath = pathJoin(setup, dir, 'config.toml');
   return {
     id: 'codex',
     name: 'Codex CLI',
@@ -163,35 +171,35 @@ export function createClients(setup: SetupEnv): ClientDefinition[] {
   const home = homeDir(setup);
   const appData = appDataDir(setup);
   const dotConfig = dotConfigDir(setup);
-  const codeUser = join(appData, 'Code', 'User');
-  const clineDir = join(codeUser, 'globalStorage', 'saoudrizwan.claude-dev');
+  const codeUser = pathJoin(setup, appData, 'Code', 'User');
+  const clineDir = pathJoin(setup, codeUser, 'globalStorage', 'saoudrizwan.claude-dev');
   return [
     jsonClient({
       id: 'claude-desktop',
       name: 'Claude Desktop',
-      configPath: join(appData, 'Claude', 'claude_desktop_config.json'),
-      installedDir: join(appData, 'Claude'),
+      configPath: pathJoin(setup, appData, 'Claude', 'claude_desktop_config.json'),
+      installedDir: pathJoin(setup, appData, 'Claude'),
       keys: ['mcpServers'],
     }),
     claudeCode(setup),
     jsonClient({
       id: 'cursor',
       name: 'Cursor',
-      configPath: join(home, '.cursor', 'mcp.json'),
-      installedDir: join(home, '.cursor'),
+      configPath: pathJoin(setup, home, '.cursor', 'mcp.json'),
+      installedDir: pathJoin(setup, home, '.cursor'),
       keys: ['mcpServers'],
     }),
     jsonClient({
       id: 'windsurf',
       name: 'Windsurf',
-      configPath: join(home, '.codeium', 'windsurf', 'mcp_config.json'),
-      installedDir: join(home, '.codeium', 'windsurf'),
+      configPath: pathJoin(setup, home, '.codeium', 'windsurf', 'mcp_config.json'),
+      installedDir: pathJoin(setup, home, '.codeium', 'windsurf'),
       keys: ['mcpServers'],
     }),
     jsonClient({
       id: 'vscode',
       name: 'VS Code',
-      configPath: join(codeUser, 'mcp.json'),
+      configPath: pathJoin(setup, codeUser, 'mcp.json'),
       installedDir: codeUser,
       keys: ['servers'],
       shape: (entry) => ({ type: 'stdio', ...stdioEntry(entry) }),
@@ -199,8 +207,8 @@ export function createClients(setup: SetupEnv): ClientDefinition[] {
     jsonClient({
       id: 'zed',
       name: 'Zed',
-      configPath: join(dotConfig, 'zed', 'settings.json'),
-      installedDir: join(dotConfig, 'zed'),
+      configPath: pathJoin(setup, dotConfig, 'zed', 'settings.json'),
+      installedDir: pathJoin(setup, dotConfig, 'zed'),
       keys: ['context_servers'],
       shape: (entry) => ({ source: 'custom', ...stdioEntry(entry) }),
     }),
@@ -208,22 +216,22 @@ export function createClients(setup: SetupEnv): ClientDefinition[] {
     jsonClient({
       id: 'gemini',
       name: 'Gemini CLI',
-      configPath: join(home, '.gemini', 'settings.json'),
-      installedDir: join(home, '.gemini'),
+      configPath: pathJoin(setup, home, '.gemini', 'settings.json'),
+      installedDir: pathJoin(setup, home, '.gemini'),
       keys: ['mcpServers'],
     }),
     jsonClient({
       id: 'cline',
       name: 'Cline',
-      configPath: join(clineDir, 'settings', 'cline_mcp_settings.json'),
+      configPath: pathJoin(setup, clineDir, 'settings', 'cline_mcp_settings.json'),
       installedDir: clineDir,
       keys: ['mcpServers'],
     }),
     jsonClient({
       id: 'opencode',
       name: 'OpenCode',
-      configPath: join(dotConfig, 'opencode', 'opencode.json'),
-      installedDir: join(dotConfig, 'opencode'),
+      configPath: pathJoin(setup, dotConfig, 'opencode', 'opencode.json'),
+      installedDir: pathJoin(setup, dotConfig, 'opencode'),
       keys: ['mcp'],
       shape: (entry) => ({ type: 'local', command: [entry.command, ...entry.args] }),
     }),

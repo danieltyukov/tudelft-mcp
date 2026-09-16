@@ -1,6 +1,6 @@
 import { accessSync, constants, statSync } from 'node:fs';
 import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { posix, win32 } from 'node:path';
 
 /** The slice of the process environment that setup reads. Tests pass a fake one. */
 export interface SetupEnv {
@@ -10,6 +10,11 @@ export interface SetupEnv {
 
 export const defaultSetupEnv = (): SetupEnv => ({ env: process.env, platform: process.platform });
 
+/** Join with the separator of the target platform, so previews are correct across hosts. */
+export function pathJoin(setup: SetupEnv, ...parts: string[]): string {
+  return (setup.platform === 'win32' ? win32 : posix).join(...parts);
+}
+
 export function homeDir({ env, platform }: SetupEnv): string {
   const home = platform === 'win32' ? env.USERPROFILE || env.HOME : env.HOME;
   return home || homedir();
@@ -18,14 +23,14 @@ export function homeDir({ env, platform }: SetupEnv): string {
 /** Per-user application data: ~/Library/Application Support, %APPDATA%, or ~/.config. */
 export function appDataDir(setup: SetupEnv): string {
   const home = homeDir(setup);
-  if (setup.platform === 'darwin') return join(home, 'Library', 'Application Support');
-  if (setup.platform === 'win32') return setup.env.APPDATA || join(home, 'AppData', 'Roaming');
-  return setup.env.XDG_CONFIG_HOME || join(home, '.config');
+  if (setup.platform === 'darwin') return pathJoin(setup, home, 'Library', 'Application Support');
+  if (setup.platform === 'win32') return setup.env.APPDATA || pathJoin(setup, home, 'AppData', 'Roaming');
+  return setup.env.XDG_CONFIG_HOME || pathJoin(setup, home, '.config');
 }
 
 /** ~/.config on every platform. Zed and OpenCode use it on macOS as well. */
 export function dotConfigDir(setup: SetupEnv): string {
-  return setup.env.XDG_CONFIG_HOME || join(homeDir(setup), '.config');
+  return setup.env.XDG_CONFIG_HOME || pathJoin(setup, homeDir(setup), '.config');
 }
 
 export function isDir(path: string): boolean {
@@ -51,7 +56,7 @@ export function findOnPath(name: string, setup: SetupEnv): string | undefined {
   const exts = windows ? (setup.env.PATHEXT ?? '.COM;.EXE;.BAT;.CMD').split(';').filter(Boolean) : [''];
   for (const dir of dirs) {
     for (const ext of exts) {
-      const candidate = join(dir, `${name}${ext.toLowerCase()}`);
+      const candidate = pathJoin(setup, dir, `${name}${ext.toLowerCase()}`);
       if (!isFile(candidate)) continue;
       try {
         accessSync(candidate, constants.X_OK);

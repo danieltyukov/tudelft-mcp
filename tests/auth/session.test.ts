@@ -58,8 +58,10 @@ describe('SessionStore', () => {
     });
     const fresh = new SessionStore(join(dir, 'session.json'), 'linux');
     expect((await fresh.load()).brightspace?.identity.id).toBe('123');
-    const mode = (await stat(join(dir, 'session.json'))).mode & 0o777;
-    expect(mode).toBe(0o600);
+    if (process.platform !== 'win32') {
+      const mode = (await stat(join(dir, 'session.json'))).mode & 0o777;
+      expect(mode).toBe(0o600);
+    }
     const raw = JSON.parse(await readFile(join(dir, 'session.json'), 'utf8')) as { format: string };
     expect(raw.format).toBe('plain-v1');
     await fresh.clear();

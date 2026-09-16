@@ -1,6 +1,6 @@
 import { chmod, mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { delimiter, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { isGlobalInstall, serverCommand } from '../../src/setup/command.js';
 import { findOnPath, type SetupEnv } from '../../src/setup/paths.js';
@@ -43,10 +43,20 @@ describe('serverCommand', () => {
 
   it('uses the global binary when tudelft-mcp is on PATH, unless mode is node', async () => {
     const bin = await mkdtemp(join(tmpdir(), 'tudelft-bin-'));
-    await writeFile(join(bin, 'tudelft-mcp'), '#!/bin/sh\nexit 0\n');
-    await chmod(join(bin, 'tudelft-mcp'), 0o755);
-    const setup: SetupEnv = { env: { HOME: '/home/s', PATH: `/nonexistent:${bin}` }, platform: 'linux' };
-    expect(findOnPath('tudelft-mcp', setup)).toBe(join(bin, 'tudelft-mcp'));
+    const windows = process.platform === 'win32';
+    const file = join(bin, windows ? 'tudelft-mcp.cmd' : 'tudelft-mcp');
+    await writeFile(file, windows ? '@echo off\r\n' : '#!/bin/sh\nexit 0\n');
+    await chmod(file, 0o755);
+    const setup: SetupEnv = {
+      env: {
+        HOME: '/home/s',
+        USERPROFILE: 'C:\\Users\\s',
+        PATH: ['/nonexistent', bin].join(delimiter),
+        PATHEXT: '.CMD',
+      },
+      platform: process.platform,
+    };
+    expect(findOnPath('tudelft-mcp', setup)).toBe(file);
     expect(findOnPath('missing-binary', setup)).toBeUndefined();
     const entry = '/home/s/tudelft-mcp/dist/cli.js';
     expect(serverCommand({ entry, execPath: node, setup })).toEqual({
