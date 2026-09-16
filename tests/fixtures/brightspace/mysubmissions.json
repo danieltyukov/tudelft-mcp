@@ -1,0 +1,22 @@
+[
+  {
+    "Entity": { "EntityId": 9001, "EntityType": "User" },
+    "Status": 1,
+    "Feedback": {
+      "Score": 8.5,
+      "Feedback": { "Text": "Good", "Html": "<p>Good work</p>" },
+      "Files": [{ "FileId": 555, "FileName": "annotated.pdf", "Size": 2000 }],
+      "GradedDate": "2026-09-20T10:00:00.000Z"
+    },
+    "Submissions": [
+      {
+        "Id": 4001,
+        "SubmittedBy": { "Identifier": "9001" },
+        "SubmissionDate": "2026-09-15T12:00:00.000Z",
+        "Comment": { "Text": "here", "Html": "here" },
+        "Files": [{ "FileId": 444, "FileName": "report.pdf", "Size": 5000 }]
+      }
+    ],
+    "CompletionDate": null
+  }
+]

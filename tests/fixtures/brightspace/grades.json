@@ -1,0 +1,41 @@
+{
+  "items": [
+    {
+      "Id": 201,
+      "Name": "Midterm",
+      "GradeType": "Numeric",
+      "MaxPoints": 10,
+      "Weight": 40,
+      "CategoryId": null,
+      "IsBonus": false,
+      "IsHidden": false,
+      "Description": { "Text": "", "Html": "" }
+    },
+    { "Id": 202, "Name": "Final", "GradeType": "Numeric", "MaxPoints": 10, "Weight": 60, "IsHidden": false },
+    { "Id": 203, "Name": "Total", "GradeType": "Calculated", "IsHidden": false }
+  ],
+  "values": [
+    {
+      "GradeObjectIdentifier": "201",
+      "GradeObjectName": "Midterm",
+      "GradeObjectType": 1,
+      "GradeObjectTypeName": "Numeric",
+      "DisplayedGrade": "7.5 / 10",
+      "PointsNumerator": 7.5,
+      "PointsDenominator": 10,
+      "WeightedNumerator": 30,
+      "WeightedDenominator": 40,
+      "Comments": { "Text": "", "Html": "" },
+      "LastModified": "2026-09-18T09:00:00.000Z",
+      "ReleasedDate": null
+    }
+  ],
+  "final": {
+    "GradeObjectIdentifier": "203",
+    "GradeObjectName": "Final Calculated Grade",
+    "GradeObjectTypeName": "Calculated",
+    "DisplayedGrade": "7.5",
+    "PointsNumerator": 7.5,
+    "PointsDenominator": 10
+  }
+}

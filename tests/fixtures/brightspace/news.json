@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 5001,
+    "Title": "Welcome",
+    "Body": {
+      "Text": "Hi",
+      "Html": "<p>Welcome to the course. Slides at <a href=\"/d2l/le/content/774356/Home\">content</a>.</p>"
+    },
+    "StartDate": "2026-09-01T08:00:00.000Z",
+    "LastModifiedDate": "2026-09-02T08:00:00.000Z",
+    "IsPublished": true,
+    "IsHidden": false,
+    "IsPinned": true,
+    "Attachments": [{ "FileId": 77, "FileName": "schedule.txt", "Size": 1234 }]
+  },
+  {
+    "Id": 5002,
+    "Title": "Exam room",
+    "Body": { "Text": "Room changed", "Html": "<p>Room changed to 36.HB.01.670</p>" },
+    "StartDate": "2026-09-10T08:00:00.000Z",
+    "IsPublished": true,
+    "IsHidden": false,
+    "Attachments": []
+  },
+  { "Id": 5003, "Title": "Draft", "Body": { "Text": "x", "Html": "x" }, "IsPublished": false }
+]

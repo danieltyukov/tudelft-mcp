@@ -1,0 +1,56 @@
+{
+  "Objects": [
+    {
+      "EventDataInfo": {
+        "CalendarEventId": 7001,
+        "OrgUnitId": 774356,
+        "Title": "Report 1 - Due",
+        "Description": "",
+        "StartDateTime": "2026-10-01T21:59:00.000Z",
+        "EndDateTime": "2026-10-01T21:59:00.000Z",
+        "IsAllDayEvent": false,
+        "IsRecurring": false,
+        "OrgUnitName": "Circuit Fundamentals",
+        "OrgUnitCode": "CESE5040+2025+4",
+        "AssociatedEntity": { "AssociatedEntityType": "D2L.LE.Dropbox.Dropbox", "AssociatedEntityId": 3001 },
+        "EventType": 6,
+        "LocationName": ""
+      },
+      "Occurrences": []
+    },
+    {
+      "EventDataInfo": {
+        "CalendarEventId": 7002,
+        "OrgUnitId": 774356,
+        "Title": "Lab session",
+        "Description": "<p>Bring laptop</p>",
+        "StartDateTime": "2026-09-21T11:45:00.000Z",
+        "EndDateTime": "2026-09-21T13:45:00.000Z",
+        "IsAllDayEvent": false,
+        "IsRecurring": true,
+        "OrgUnitName": "Circuit Fundamentals",
+        "OrgUnitCode": "CESE5040+2025+4",
+        "EventType": 1,
+        "LocationName": "Lab 2",
+        "CalendarEventViewUrl": "/d2l/le/calendar/774356/event/7002/detailsview"
+      },
+      "Occurrences": [
+        {
+          "RecurrenceId": 1,
+          "CalendarEventId": 7002,
+          "StartDateTime": "2026-09-21T11:45:00.000Z",
+          "EndDateTime": "2026-09-21T13:45:00.000Z",
+          "IsAllDayEvent": false
+        },
+        {
+          "RecurrenceId": 2,
+          "CalendarEventId": 7002,
+          "StartDateTime": "2026-09-28T11:45:00.000Z",
+          "EndDateTime": "2026-09-28T13:45:00.000Z",
+          "IsAllDayEvent": false
+        }
+      ]
+    }
+  ],
+  "Next": null
+}

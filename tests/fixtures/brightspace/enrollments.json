@@ -1,0 +1,44 @@
+{
+  "PagingInfo": { "Bookmark": "1", "HasMoreItems": false },
+  "Items": [
+    {
+      "OrgUnit": {
+        "Id": 774356,
+        "Type": { "Id": 3 },
+        "Name": "Circuit Fundamentals",
+        "Code": "CESE5040+2025+4",
+        "HomeUrl": "/d2l/home/774356"
+      },
+      "Access": {
+        "IsActive": true,
+        "CanAccess": true,
+        "StartDate": "2026-02-01T00:00:00.000Z",
+        "EndDate": null,
+        "ClasslistRoleName": "Student"
+      },
+      "PinDate": null
+    },
+    {
+      "OrgUnit": {
+        "Id": 1,
+        "Type": { "Id": 3 },
+        "Name": "EEMCS",
+        "Code": "EWI+ORG",
+        "HomeUrl": "/d2l/home/1"
+      },
+      "Access": { "IsActive": true, "CanAccess": true },
+      "PinDate": null
+    },
+    {
+      "OrgUnit": {
+        "Id": 500,
+        "Type": { "Id": 3 },
+        "Name": "Old course",
+        "Code": "EE1000+2023+1",
+        "HomeUrl": "/d2l/home/500"
+      },
+      "Access": { "IsActive": false, "CanAccess": false },
+      "PinDate": null
+    }
+  ]
+}

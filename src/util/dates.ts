@@ -88,7 +88,7 @@ export function toLocal(value: unknown): string | undefined {
   const time = Date.parse(value);
   if (!Number.isFinite(time)) return undefined;
   const parts = Object.fromEntries(localFormatter.formatToParts(time).map((p) => [p.type, p.value]));
-  return `${parts.weekday} ${parts.day} ${monthName(Number(parts.month))} ${parts.year} ${parts.hour}:${parts.minute}`;
+  return `${parts.weekday} ${Number(parts.day)} ${monthName(Number(parts.month))} ${parts.year} ${parts.hour}:${parts.minute}`;
 }
 
 function monthName(month: number): string {

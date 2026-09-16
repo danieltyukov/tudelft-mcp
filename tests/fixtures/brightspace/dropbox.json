@@ -1,0 +1,33 @@
+[
+  {
+    "Id": 3001,
+    "Name": "Report 1",
+    "CustomInstructions": { "Text": "Upload PDF", "Html": "<p>Upload a <b>PDF</b> report.</p>" },
+    "Attachments": [{ "FileId": 88, "FileName": "template.docx", "Size": 100 }],
+    "TotalFiles": 0,
+    "Availability": { "StartDate": "2026-09-01T00:00:00.000Z", "EndDate": "2026-10-10T21:59:00.000Z" },
+    "IsHidden": false,
+    "Assessment": { "ScoreDenominator": 10, "Rubrics": [] },
+    "DropboxType": 0,
+    "GroupTypeId": null,
+    "DueDate": "2026-10-01T21:59:00.000Z",
+    "SubmissionType": 0,
+    "LinkAttachments": []
+  },
+  {
+    "Id": 3002,
+    "Name": "Reflection",
+    "CustomInstructions": { "Text": "Write", "Html": "Write 200 words" },
+    "Attachments": [],
+    "TotalFiles": 1,
+    "Availability": null,
+    "IsHidden": false,
+    "Assessment": { "ScoreDenominator": null, "Rubrics": [] },
+    "DropboxType": 1,
+    "GroupTypeId": 4,
+    "DueDate": null,
+    "SubmissionType": 1,
+    "LinkAttachments": []
+  },
+  { "Id": 3003, "Name": "Hidden", "IsHidden": true }
+]

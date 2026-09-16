@@ -1,0 +1,79 @@
+{
+  "Modules": [
+    {
+      "ModuleId": 100,
+      "Title": "Week 1",
+      "Description": {
+        "Text": "Intro",
+        "Html": "<p>Intro week. See <a href=\"https://example.org/x?token=abc\">site</a></p>"
+      },
+      "IsHidden": false,
+      "Topics": [
+        {
+          "TopicId": 1001,
+          "Identifier": "1001",
+          "TypeIdentifier": "File",
+          "Title": "Lecture 1 slides",
+          "Url": "/content/enforced/774356/lecture1.pdf",
+          "ActivityType": 1,
+          "IsHidden": false,
+          "IsLocked": false,
+          "IsBroken": false,
+          "LastModifiedDate": "2026-09-01T10:00:00.000Z",
+          "Description": null
+        },
+        {
+          "TopicId": 1002,
+          "Identifier": "1002",
+          "TypeIdentifier": "File",
+          "Title": "Recording",
+          "Url": "/content/enforced/774356/lecture1.mp4",
+          "ActivityType": 1,
+          "IsHidden": false
+        },
+        {
+          "TopicId": 1003,
+          "Identifier": "1003",
+          "TypeIdentifier": "Link",
+          "Title": "Collegerama lecture",
+          "Url": "https://collegeramavideoportal.tudelft.nl/catalogue/x/presentation/abc",
+          "ActivityType": 2,
+          "IsHidden": false
+        },
+        {
+          "TopicId": 1004,
+          "Identifier": "1004",
+          "TypeIdentifier": "Link",
+          "Title": "Quiz 1",
+          "Url": "/d2l/lms/quizzing/user/quiz_summary.d2l?ou=774356&qi=5",
+          "ActivityType": 7,
+          "IsHidden": false
+        },
+        {
+          "TopicId": 1005,
+          "Identifier": "1005",
+          "TypeIdentifier": "File",
+          "Title": "Hidden",
+          "Url": "/content/enforced/774356/h.pdf",
+          "IsHidden": true
+        }
+      ],
+      "Modules": [
+        {
+          "ModuleId": 101,
+          "Title": "Extra",
+          "Topics": [
+            {
+              "TopicId": 1010,
+              "TypeIdentifier": "File",
+              "Title": "Notes",
+              "Url": "/content/enforced/774356/notes.docx",
+              "ActivityType": 1
+            }
+          ],
+          "Modules": []
+        }
+      ]
+    }
+  ]
+}

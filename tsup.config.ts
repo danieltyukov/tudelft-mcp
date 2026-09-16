@@ -3,8 +3,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     cli: 'src/cli.ts',
-    'pdf-worker': 'src/documents/pdf-worker.ts',
-    'ical-worker': 'src/timetable/worker.ts',
+    'pdf-worker': 'src/documents/pdf-worker.js',
   },
   format: ['esm'],
   target: 'node20',
