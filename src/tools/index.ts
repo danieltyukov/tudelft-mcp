@@ -3,6 +3,8 @@ import type { ToolRegistry } from './registry.js';
 import { registerAuthTools } from './auth.js';
 import { registerCourseTools } from './courses.js';
 import { registerOsirisTools } from './osiris.js';
+import { registerTimetableTools } from './timetable.js';
+import { registerExamTools } from './exams.js';
 
 /**
  * Each domain registers its own tools. Add a line here when creating a new
@@ -12,4 +14,6 @@ export function registerAllTools(reg: ToolRegistry, ctx: AppContext): void {
   registerAuthTools(reg, ctx);
   registerCourseTools(reg, ctx);
   registerOsirisTools(reg, ctx);
+  registerTimetableTools(reg, ctx);
+  registerExamTools(reg, ctx);
 }

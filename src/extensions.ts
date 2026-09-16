@@ -1,5 +1,6 @@
 import type { AppContext } from './context.js';
 import { installOsiris } from './osiris/install.js';
+import { installTimetable } from './timetable/install.js';
 
 /**
  * Domain modules that hook into the context (login connectors, status checks,
@@ -8,4 +9,5 @@ import { installOsiris } from './osiris/install.js';
  */
 export function installExtensions(ctx: AppContext): void {
   installOsiris(ctx);
+  installTimetable(ctx);
 }
