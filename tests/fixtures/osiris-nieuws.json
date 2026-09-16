@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "id_nieuws": 41,
+      "datum": "2026-09-10",
+      "titel": "Registration period Q2 opens",
+      "samenvatting": "Course registration for Q2 opens on 15 September.",
+      "inhoud": "<p>Course registration for <b>Q2</b> opens on 15 September. See <a href=\"https://www.tudelft.nl/register?token=abc\">the portal</a>.</p>",
+      "link": "https://www.tudelft.nl/news/41?session=xyz",
+      "bron": "Education and Student Affairs"
+    }
+  ],
+  "hasMore": false,
+  "limit": 50,
+  "offset": 0,
+  "count": 1
+}

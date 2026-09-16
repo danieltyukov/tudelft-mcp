@@ -1,0 +1,43 @@
+{
+  "data": {
+    "type": "items",
+    "id": "70002",
+    "attributes": {
+      "type_canonical_name": "modules",
+      "data": {
+        "item_id": "70002",
+        "code": "EE4109",
+        "jaar": "2025-2026",
+        "course_name_2": { "en": "Signal Processing", "nl": "Signaalverwerking" },
+        "studiepunten_ects": "5",
+        "cr_course_start": [
+          { "en": "Q1", "nl": "Q1" },
+          { "en": "Q3", "nl": "Q3" }
+        ],
+        "voertaal": { "en": "English", "nl": "Engels" },
+        "cr_level": { "en": "MSc", "nl": "MSc" },
+        "faculteit": { "en": "Electrical Engineering, Mathematics and Computer Science", "nl": "EWI" },
+        "locatie": { "en": "Delft", "nl": "Delft" },
+        "opleidingen_namen": [
+          { "en": "MSc Electrical Engineering", "nl": "MSc Electrical Engineering" },
+          { "en": "MSc Computer Engineering", "nl": "MSc Computer Engineering" }
+        ],
+        "status": { "en": "Published", "nl": "Gepubliceerd" },
+        "vakbeschrijving": {
+          "en": "<p>Discrete-time signals and systems, the <b>DFT</b> and filter design. See <a href=\"https://example.tudelft.nl/course?token=secret123\">the course page</a>.</p>",
+          "nl": "<p>Discrete signalen en systemen.</p>"
+        },
+        "leerdoelen": {
+          "en": "<ul><li>Design FIR and IIR filters</li><li>Apply the DFT</li></ul>",
+          "nl": ""
+        },
+        "toelichting_onderwijsmethode": { "en": "Lectures and lab sessions.", "nl": "Colleges en practica." },
+        "toetsing": { "en": "Written exam (70%) and lab report (30%).", "nl": "Tentamen en labverslag." },
+        "literatuur_en_studiemateriaal": { "en": "Oppenheim, Discrete-Time Signal Processing.", "nl": "" },
+        "cr_expected_prior_knowledge_nld": { "en": "Linear algebra, calculus, basic signals.", "nl": "" },
+        "verantwoordelijk_docent_1": "Dr. A. Example (a.example@tudelft.nl)",
+        "docenten": [{ "naam": "B. Voorbeeld", "email": "b.voorbeeld@tudelft.nl" }, "Dr. A. Example"]
+      }
+    }
+  }
+}

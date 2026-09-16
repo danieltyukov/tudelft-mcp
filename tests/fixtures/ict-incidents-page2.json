@@ -1,0 +1,18 @@
+{
+  "count": 3,
+  "next": null,
+  "previous": "https://meldingen-ict.tudelft.nl/api/incidents/?format=json",
+  "results": [
+    {
+      "id": 9003,
+      "title_EN": "Printing unavailable",
+      "description_EN": "Follow-me printing is unavailable.",
+      "closed": true,
+      "creation_date": "2026-09-10T10:00:00+02:00",
+      "from_date": "2026-09-10T09:30:00+02:00",
+      "period_info_EN": "Resolved",
+      "impact": { "title_EN": "Low" },
+      "status_update": []
+    }
+  ]
+}
