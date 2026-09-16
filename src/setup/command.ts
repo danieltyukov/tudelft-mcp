@@ -34,7 +34,9 @@ export function isGlobalInstall(entry: string): boolean {
 export function serverCommand(options: CommandOptions = {}): ServerEntry {
   const mode = options.mode ?? 'auto';
   if (mode === 'npx') return { command: 'npx', args: ['-y', 'tudelft-mcp', 'serve'] };
-  const entry = resolve(options.entry ?? process.argv[1] ?? 'dist/cli.js');
+  let entry = resolve(options.entry ?? process.argv[1] ?? 'dist/cli.js');
+  // Running from source through tsx: clients need the built entry point instead.
+  if (/[\\/]src[\\/]cli\.ts$/.test(entry)) entry = resolve(entry, '..', '..', 'dist', 'cli.js');
   const setup = options.setup ?? defaultSetupEnv();
   if (mode === 'auto' && (isGlobalInstall(entry) || findOnPath('tudelft-mcp', setup))) {
     return { command: 'tudelft-mcp', args: ['serve'] };
