@@ -107,10 +107,6 @@ Unit tests use fixtures and a mocked `fetch`. Tests under `tests/live/` talk to 
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the setup, how to add a tool, and the rules for fixtures. Security issues go through [SECURITY.md](SECURITY.md).
 
-## Acknowledgements
-
-Thanks to the earlier my-tudelft-mcp project for mapping the university APIs first.
-
 ## License
 
 MIT. See [LICENSE](LICENSE).

@@ -11,7 +11,7 @@ schedule, the public Study Guide and public campus services, plus a small set of
 previewed, explicitly confirmed write actions (assignment submission, group join,
 discussion reply, OSIRIS course/exam registration).
 
-It replaces the reference project (viftode4/my-tudelft-mcp) with something that installs
+It is built to install
 in one command on Windows, macOS and Linux, signs in once, refreshes silently, connects
 to more than one client at a time, and is small enough for outside contributors to read.
 
