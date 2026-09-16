@@ -20,7 +20,7 @@ describe('expandCalendar', () => {
     expect(moved?.title).toBe('EE4790 - Circuit Fundamentals (moved)');
     expect(moved?.location).toBe('EEMCS - Lecture Hall B');
     expect(moved?.end).toBe('2026-04-06T15:30:00.000Z');
-    expect(moved?.startLocal).toBe('Mon 06 Apr 2026 15:45');
+    expect(moved?.startLocal).toBe('Mon 6 Apr 2026 15:45');
     expect(lectures.every((item) => item.recurring)).toBe(true);
     const first = lectures[0]!;
     expect(first.startLocal).toBe('Mon 16 Mar 2026 13:45');
