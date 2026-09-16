@@ -1,0 +1,36 @@
+{
+  "id_cursus": "scur:77",
+  "cursus": "EE4790",
+  "cursus_korte_naam": "Circuit Fundamentals",
+  "collegejaar": 2026,
+  "inschrijven_toegestaan": "J",
+  "open_voor_inschrijving": "J",
+  "toetsen": [
+    {
+      "id_toets_gelegenheid": "scto:123",
+      "toets": "WEX",
+      "toets_omschrijving": "Written exam",
+      "toetsdatum": "2026-10-28",
+      "tijd_vanaf": 13.3,
+      "tijd_tm": 16,
+      "locatie": "Aula",
+      "ingeschreven": "N",
+      "inschrijven_toegestaan": "J",
+      "open_voor_inschrijving": "J",
+      "beschikbare_plekken": 40,
+      "voorzieningen": []
+    },
+    {
+      "id_toets_gelegenheid": "scto:124",
+      "toets": "WEX",
+      "toets_omschrijving": "Written exam (resit)",
+      "toetsdatum": "2027-01-20",
+      "tijd_vanaf": 9,
+      "tijd_tm": 12,
+      "ingeschreven": "N",
+      "inschrijven_toegestaan": "J",
+      "open_voor_inschrijving": "N",
+      "beschikbare_plekken": 40
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id_cursus_blok": "scbl:900",
+  "id_cursus": "scur:77",
+  "cursus": "EE4790",
+  "cursus_korte_naam": "Circuit Fundamentals",
+  "collegejaar": 2026,
+  "blok": "Q1",
+  "ingeschreven": "N",
+  "inschrijven_toegestaan": "J",
+  "open_voor_inschrijving": "J",
+  "beschikbare_plekken": 12,
+  "min_voorkeursgroepen": 0,
+  "werkvormgroepen_per_werkvorm": [],
+  "kosten": [],
+  "toetsen": [
+    { "toets": "WEX", "toets_omschrijving": "Written exam", "automatisch_ingeschreven": "J" },
+    { "toets": "PRJ", "toets_omschrijving": "Project", "automatisch_ingeschreven": "N" }
+  ],
+  "werkvormen": [
+    { "werkvorm": "HC", "werkvorm_omschrijving": "Lecture", "automatisch_ingeschreven": "J" },
+    { "werkvorm": "LAB", "werkvorm_omschrijving": "Laboratory", "automatisch_ingeschreven": "N" }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "id_resultaat": "sres:501",
+      "cursus": "EE4790",
+      "cursus_korte_naam": "Circuit Fundamentals",
+      "id_cursus": "scur:77",
+      "toets_omschrijving": "Written exam",
+      "toets": "WEX",
+      "resultaat": "8.5",
+      "resultaat_omschrijving": "8.5",
+      "score": 85,
+      "weging": 70,
+      "toetsdatum": "2026-04-15",
+      "mutatiedatum": "2026-04-28",
+      "collegejaar": 2025,
+      "studiepunten": 5
+    },
+    {
+      "id_resultaat": "sres:502",
+      "cursus": "CESE5040",
+      "cursus_korte_naam": "Embedded Systems",
+      "id_cursus": "scur:78",
+      "toets_omschrijving": "Lab report",
+      "toets": "LAB",
+      "resultaat": "V",
+      "resultaat_omschrijving": "Pass",
+      "score": null,
+      "weging": 30,
+      "toetsdatum": "2026-03-20",
+      "mutatiedatum": "2026-03-25",
+      "collegejaar": 2025
+    }
+  ],
+  "hasMore": true,
+  "limit": 2,
+  "offset": 0,
+  "count": 3
+}

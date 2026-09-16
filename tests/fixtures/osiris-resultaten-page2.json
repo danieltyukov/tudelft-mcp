@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id_resultaat": "sres:503",
+      "cursus": "EE4109",
+      "cursus_korte_naam": "Signal Processing",
+      "id_cursus": "scur:79",
+      "toets_omschrijving": "Final",
+      "toets": "FIN",
+      "resultaat": "7",
+      "score": 70,
+      "weging": 100,
+      "toetsdatum": "2025-11-05",
+      "mutatiedatum": "2025-11-20",
+      "collegejaar": 2025
+    }
+  ],
+  "hasMore": false,
+  "limit": 2,
+  "offset": 2,
+  "count": 3
+}
