@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "type": "items",
+      "id": "70002",
+      "attributes": {
+        "type_canonical_name": "modules",
+        "data": {
+          "item_id": "70002",
+          "code": "EE4109",
+          "jaar": "2025-2026",
+          "course_name_2": { "en": "Signal Processing", "nl": "Signaalverwerking" },
+          "studiepunten_ects": "5",
+          "faculteit": { "en": "Electrical Engineering, Mathematics and Computer Science", "nl": "EWI" },
+          "cr_level": { "en": "MSc", "nl": "MSc" },
+          "cr_course_start": [
+            { "en": "Q1", "nl": "Q1" },
+            { "en": "Q3", "nl": "Q3" }
+          ]
+        }
+      }
+    }
+  ],
+  "meta": { "total": 2, "offset": 1, "size": 1 }
+}

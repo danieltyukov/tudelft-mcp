@@ -1,0 +1,35 @@
+{
+  "count": 3,
+  "next": "https://meldingen-ict.tudelft.nl/api/incidents/?format=json&page=2",
+  "previous": null,
+  "results": [
+    {
+      "id": 9001,
+      "title_EN": "Brightspace slow to load",
+      "description_EN": "<p>Brightspace pages load slowly for some users. See <a href=\"https://status.example.nl/?sig=abc\">status</a>.</p>",
+      "closed": false,
+      "creation_date": "2026-09-15T08:12:00+02:00",
+      "from_date": "2026-09-15T08:00:00+02:00",
+      "period_info_EN": "Since 08:00",
+      "impact": { "title_EN": "Medium" },
+      "status_update": [
+        {
+          "date": "2026-09-15T09:00:00+02:00",
+          "status": { "title_EN": "Investigating" },
+          "description_EN": "<p>We are investigating.</p>"
+        }
+      ]
+    },
+    {
+      "id": 9002,
+      "title_EN": "Eduroam outage in building 36",
+      "description_EN": "Wireless network unavailable.",
+      "closed": true,
+      "creation_date": "2026-09-14T10:00:00+02:00",
+      "from_date": "2026-09-14T09:30:00+02:00",
+      "period_info_EN": "Resolved",
+      "impact": { "title_EN": "High" },
+      "status_update": []
+    }
+  ]
+}
