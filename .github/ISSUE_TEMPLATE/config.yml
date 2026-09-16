@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and troubleshooting
+    url: https://github.com/danieltyukov/tudelft-mcp/blob/main/docs/faq.md
+    about: Check the FAQ first; it covers sign-in, browsers, Windows and ChatGPT.
+  - name: Security report
+    url: https://github.com/danieltyukov/tudelft-mcp/security/advisories/new
+    about: Report a vulnerability privately instead of opening an issue.
+  - name: Discussions
+    url: https://github.com/danieltyukov/tudelft-mcp/discussions
+    about: Ideas, usage questions and anything that is not a bug.

@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest a new tool, a change to an existing tool, or a new client.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do
+      description: Describe the task from the student's point of view, for example the question you would ask your assistant.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What the tool or command should do, what it should return, and which service it reads from (Brightspace, OSIRIS, MyTimetable, Study Guide, other).
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - New read tool
+        - New write action (needs a prepare and confirm pair)
+        - Change to an existing tool
+        - New MCP client in `tudelft-mcp setup`
+        - Installer or CLI
+        - Documentation
+        - Other
+  - type: textarea
+    id: api
+    attributes:
+      label: Known endpoint
+      description: If you know which university endpoint provides the data, describe it here without pasting real responses. Shape and field names are enough.
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Checks
+      options:
+        - label: This request does not include real course data, ids, names or session material.
+          required: true
