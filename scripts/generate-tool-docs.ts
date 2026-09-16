@@ -122,7 +122,7 @@ function annotationSummary(annotations: ToolAnnotations | undefined): string {
 }
 
 function cell(text: string): string {
-  return text.replace(/\|/g, '\\|').replace(/\r?\n/g, ' ').trim();
+  return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\r?\n/g, ' ').trim();
 }
 
 function firstSentence(text: string): string {

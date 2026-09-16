@@ -59,7 +59,8 @@ function jsonClient(spec: JsonClientSpec): ClientDefinition {
   };
 }
 
-const quote = (value: string): string => (/[\s"]/.test(value) ? `"${value.replace(/"/g, '\\"')}"` : value);
+const quote = (value: string): string =>
+  /[\s"\\]/.test(value) ? `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"` : value;
 
 /** Run a command to completion. Resolves true on exit code 0, false on any failure. */
 function runCommand(binary: string, args: string[]): Promise<boolean> {

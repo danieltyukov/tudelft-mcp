@@ -31,6 +31,9 @@ const exists = (path: string): Promise<boolean> =>
 const readJson = async (path: string): Promise<Record<string, unknown>> =>
   JSON.parse(await readFile(path, 'utf8')) as Record<string, unknown>;
 
+/** Compare paths independently of the host separator; posix joins are valid on Windows too. */
+const norm = (path: string): string => path.replace(/\\/g, '/');
+
 describe('JSON clients', () => {
   it('merges into an existing Claude Desktop config, keeps other servers and writes one backup', async () => {
     const dir = await home();
@@ -40,7 +43,9 @@ describe('JSON clients', () => {
     const before = JSON.stringify({ mcpServers: { other: { command: 'x' } }, theme: 'dark' });
     await writeFile(path, before);
     const desktop = client(setup, 'claude-desktop');
-    expect(desktop.detect()).toEqual({ installed: true, configPath: path });
+    const detected = desktop.detect();
+    expect(detected.installed).toBe(true);
+    expect(norm(detected.configPath)).toBe(norm(path));
 
     const result = await desktop.write(entry, { dryRun: false });
     expect(result.changed).toBe(true);
@@ -126,7 +131,9 @@ describe('JSON clients', () => {
     const dir = await home();
     const setup = linux(dir);
     const code = client(setup, 'claude-code');
-    expect(code.detect()).toEqual({ installed: false, configPath: join(dir, '.claude.json') });
+    const detectedCode = code.detect();
+    expect(detectedCode.installed).toBe(false);
+    expect(norm(detectedCode.configPath)).toBe(norm(join(dir, '.claude.json')));
     await writeFile(join(dir, '.claude.json'), JSON.stringify({ numStartups: 3, mcpServers: { a: {} } }));
     expect(code.detect().installed).toBe(true);
     const result = await code.write(entry, { dryRun: false });
