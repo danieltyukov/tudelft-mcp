@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-09-16
+
 ### Added
 
 - One-command installers for macOS, Linux (`install.sh`) and Windows (`install.ps1`), plus an npm package with a `tudelft-mcp` binary.
@@ -25,3 +27,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - `status`, `doctor`, `logout` and `tools` commands.
 - Static site, README, contributor documentation, generated tool reference (`npm run docs:tools`).
 - CI on Ubuntu, macOS and Windows with Node 20 and 22; release, Pages and CodeQL workflows.
+
+[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/danieltyukov/tudelft-mcp/releases/tag/v0.1.0
