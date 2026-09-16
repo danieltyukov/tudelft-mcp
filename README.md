@@ -72,16 +72,16 @@ This prints a public URL and a bearer token to paste into ChatGPT's connector se
 
 ## Tools
 
-| Area                          | Tools                                                                                                              |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Sign-in                       | `auth_status`, `auth_login`, `auth_logout`                                                                         |
-| Courses and materials         | `list_courses`, `get_course_content`, `read_material`, `sync_course`, `search_materials`, `whats_new`              |
-| Announcements and assignments | `get_announcements`, `list_assignments`, `read_assignment_attachment`, `prepare_submission`, `confirm_submission`  |
-| Grades and planning           | `get_grades`, `get_grade_summary`, `get_upcoming`, `get_calendar`, `exam_overview`                                 |
-| OSIRIS                        | `osiris_grades`, `osiris_progress`, `osiris_registrations`, `osiris_search_courses`, `osiris_prepare_registration` |
-| Timetable                     | `get_timetable`, `timetable_status`, `connect_timetable`                                                           |
-| Study Guide and campus        | `search_study_guide`, `get_study_guide`, `search_rooms`, `search_study_spaces`, `get_ict_notices`                  |
-| Discussions and groups        | `read_discussions`, `prepare_discussion_post`, `get_groups`, `prepare_group_join`, `list_locker_files`             |
+| Area                          | Tools                                                                                                                   |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Sign-in                       | `auth_status`, `auth_login`, `auth_logout`                                                                              |
+| Courses and materials         | `list_courses`, `get_course_content`, `read_material`, `sync_course`, `search_materials`, `whats_new`, `search_catalog` |
+| Announcements and assignments | `get_announcements`, `list_assignments`, `read_assignment_attachment`, `prepare_submission`, `confirm_submission`       |
+| Grades and planning           | `get_grades`, `get_grade_summary`, `get_upcoming`, `get_calendar`, `exam_overview`                                      |
+| OSIRIS                        | `osiris_grades`, `osiris_progress`, `osiris_registrations`, `osiris_search_courses`, `osiris_prepare_registration`      |
+| Timetable                     | `get_timetable`, `timetable_status`, `connect_timetable`                                                                |
+| Study Guide and campus        | `search_study_guide`, `get_study_guide`, `search_rooms`, `search_study_spaces`, `get_ict_notices`                       |
+| Discussions and groups        | `read_discussions`, `prepare_discussion_post`, `get_groups`, `prepare_group_join`, `list_locker_files`                  |
 
 The full list with input fields and annotations is generated into [docs/tools.md](docs/tools.md) by `npm run docs:tools`.
 
