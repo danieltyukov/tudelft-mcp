@@ -61,6 +61,8 @@ Formatting is enforced by Prettier (`npm run format`) and the rules in `eslint.c
 
 ## Pull request checklist
 
+`main` is protected: changes land through pull requests, every CI job (Ubuntu, macOS and Windows on Node 20 and 22, plus formatting) must pass, force pushes and deletions are blocked, and history stays linear (squash or merge).
+
 - `npm run check` passes locally.
 - New code has a fixture test; unit tests do not need a live session.
 - No real course data, ids, names or session files in the diff.
