@@ -1,6 +1,7 @@
 import type { BrowserContext, Page } from 'playwright-core';
 import type { Config } from '../config.js';
 import { TudelftError } from '../errors.js';
+import { debug } from '../context.js';
 import { record, str } from '../util/text.js';
 import type { BrightspaceSession, Cookie, Identity } from './session.js';
 
@@ -206,6 +207,9 @@ export async function captureBrightspace(
   // Keep every domain: the IdP and SURFconext cookies are session cookies that Chrome
   // drops on exit, so they are seeded back into later headless launches from here.
   const cookies = (await context.cookies()).map(toCookie);
+  debug(
+    `captured cookies: ${cookies.map((c) => `${c.domain}:${c.name}${c.expires < 0 ? '' : '(p)'}`).join(' ')}`,
+  );
   const session: BrightspaceSession = { origin, cookies, identity, savedAt: new Date().toISOString() };
   if (material.xsrf) session.xsrf = material.xsrf;
   if (bearer) session.bearer = bearer;

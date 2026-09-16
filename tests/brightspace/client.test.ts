@@ -141,3 +141,29 @@ describe('BrightspaceClient', () => {
     });
   });
 });
+
+describe('403 handling', () => {
+  it('renews when a 403 comes with a dead session, but reports PERMISSION_DENIED when the session is alive', async () => {
+    let renewals = 0;
+    const { client, store } = await makeClient(async () => {
+      renewals++;
+      await store.update((data) => {
+        data.brightspace!.bearer = 'bearer-2';
+      });
+      return true;
+    });
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (input, init) => {
+      const url = String(input);
+      if (url.endsWith('/d2l/api/versions/')) return json(versions);
+      const auth = new Headers(init?.headers).get('authorization');
+      if (url.endsWith('/users/whoami'))
+        return auth === 'Bearer bearer-2' ? json({ Identifier: '1' }) : new Response('', { status: 403 });
+      if (url.includes('/courses/')) return new Response('', { status: 403 });
+      return json({ ok: true });
+    });
+    expect(await client.get('lp', 'users/whoami')).toEqual({ Identifier: '1' });
+    expect(renewals).toBe(1);
+    await expect(client.get('lp', 'courses/5')).rejects.toMatchObject({ code: 'PERMISSION_DENIED' });
+    expect(renewals).toBe(1);
+  });
+});

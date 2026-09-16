@@ -9,6 +9,11 @@ import { PreviewStore } from './previews.js';
 
 export type Logger = (message: string) => void;
 
+/** Diagnostics for TUDELFT_MCP_DEBUG=1, written to stderr so the MCP stream stays clean. */
+export const debug: Logger = (message) => {
+  if (process.env.TUDELFT_MCP_DEBUG) process.stderr.write(`[tudelft-mcp] ${message}\n`);
+};
+
 /**
  * A login connector signs one service in inside the shared browser window.
  * Brightspace is built in; OSIRIS and MyTimetable register theirs.
@@ -69,6 +74,9 @@ export function createContext(config: Config = loadConfig()): AppContext {
       return true;
     } catch (error) {
       if (error instanceof TudelftError && error.code === 'ACCOUNT_CHANGED') throw error;
+      debug(
+        `Brightspace renewal failed: ${error instanceof Error ? `${error.name}: ${error.message}` : String(error)}`,
+      );
       return false;
     }
   };

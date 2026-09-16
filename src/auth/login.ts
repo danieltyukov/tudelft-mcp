@@ -1,5 +1,5 @@
 import { rm } from 'node:fs/promises';
-import type { AppContext, Logger } from '../context.js';
+import { debug, type AppContext, type Logger } from '../context.js';
 import { toSafeError, TudelftError } from '../errors.js';
 import { captureBrightspace, waitForBrightspace } from './brightspace-auth.js';
 
@@ -41,6 +41,16 @@ export async function runLogin(ctx: AppContext, options: LoginOptions, log: Logg
   };
   await ctx.browser.withContext({ headless: false, seed: !options.fresh }, async (context) => {
     const page = context.pages()[0] ?? (await context.newPage());
+    page.on('framenavigated', (frame) => {
+      if (frame === page.mainFrame()) {
+        try {
+          const url = new URL(frame.url());
+          debug(`login hop: ${url.host}${url.pathname.slice(0, 60)}`);
+        } catch {
+          /* ignore */
+        }
+      }
+    });
     log(
       `Opening ${config.brightspaceUrl} in ${ctx.browser.describe()?.name ?? 'the browser'}. Finish the TU Delft sign-in there (${Math.round(timeoutMs / 60_000)} minutes).`,
     );

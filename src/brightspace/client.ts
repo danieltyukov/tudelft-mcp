@@ -110,6 +110,23 @@ export class BrightspaceClient {
     return false;
   }
 
+  /** True when the saved session still answers the current-user endpoint. */
+  private async sessionAlive(session: BrightspaceSession): Promise<boolean> {
+    try {
+      const versions = await this.versions();
+      const url = new URL(`/d2l/api/lp/${versions.lp}/users/whoami`, this.origin);
+      const response = await fetch(url, {
+        headers: await this.headers(url, session),
+        redirect: 'manual',
+        signal: AbortSignal.timeout(this.config.timeoutMs),
+      });
+      await response.body?.cancel().catch(() => undefined);
+      return response.status === 200 && (response.headers.get('content-type') ?? '').includes('json');
+    } catch {
+      return false;
+    }
+  }
+
   /** GET JSON from an absolute API URL. */
   async getUrl(input: string): Promise<unknown> {
     const url = sameOrigin(input, this.origin);
@@ -158,6 +175,16 @@ export class BrightspaceClient {
           'AUTH_REQUIRED',
           'The Brightspace session has expired and could not be renewed silently. Run "tudelft-mcp login".',
         );
+      }
+      if (response.status === 403 && !renewed) {
+        // Brightspace answers 403 both for a missing session and for a real permission
+        // denial. Probe the session cheaply before deciding which one this is.
+        await response.body?.cancel().catch(() => undefined);
+        renewed = true;
+        if (!(await this.sessionAlive(session)) && (await this.renew())) continue;
+        throw new TudelftError('PERMISSION_DENIED', 'Brightspace does not allow this account to read that.', {
+          status: 403,
+        });
       }
       if (!response.ok) {
         await response.body?.cancel().catch(() => undefined);
@@ -364,6 +391,14 @@ export class BrightspaceClient {
           continue;
         }
         throw new TudelftError('AUTH_REQUIRED', 'Sign in again to download this file.');
+      }
+      if (response.status === 403 && !renewed) {
+        await response.body?.cancel().catch(() => undefined);
+        renewed = true;
+        if (!(await this.sessionAlive(session)) && (await this.renew())) continue;
+        throw new TudelftError('PERMISSION_DENIED', 'Brightspace did not provide this file.', {
+          status: 403,
+        });
       }
       if (!response.ok) {
         await response.body?.cancel().catch(() => undefined);
