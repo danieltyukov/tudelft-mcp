@@ -1,23 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="tudelft-mcp: your TU Delft courses, in your AI assistant">
-  <rect width="1200" height="630" fill="#0B1220"/>
-  <g transform="translate(100 140) scale(2.5)">
-    <rect width="64" height="64" rx="14" fill="#0F1B2D"/>
-    <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="#22304A"/>
-    <g fill="#2F80ED">
-      <rect x="25" y="44" width="4" height="10" rx="1.5"/>
-      <rect x="35" y="44" width="4" height="10" rx="1.5"/>
-    </g>
-    <g fill="#5EEAD4">
-      <rect x="13" y="11" width="38" height="8" rx="2.5"/>
-      <rect x="28" y="11" width="8" height="30"/>
-      <rect x="21" y="37" width="22" height="9" rx="3"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#FBFAF7"/>
+  <rect x="100" y="120" width="96" height="96" rx="15" fill="#00A6D6"/>
+  <g fill="#FFFFFF" transform="translate(100 120) scale(1.5)">
+    <rect x="14" y="13" width="36" height="8" rx="1.5"/>
+    <rect x="28" y="13" width="8" height="30"/>
+    <rect x="21" y="39" width="22" height="9" rx="2"/>
+    <rect x="25" y="48" width="4" height="7" rx="1"/>
+    <rect x="35" y="48" width="4" height="7" rx="1"/>
   </g>
-  <text x="300" y="248" fill="#E6EDF7" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="84" font-weight="600" letter-spacing="-2">tudelft-mcp</text>
-  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
-    <text x="100" y="400" fill="#E6EDF7" font-size="44">Your TU Delft courses, in your AI assistant.</text>
-    <text x="100" y="456" fill="#9AA8BD" font-size="30">Brightspace, OSIRIS, MyTimetable and the Study Guide over MCP.</text>
-    <text x="100" y="504" fill="#9AA8BD" font-size="30">Runs locally. One browser sign-in.</text>
-    <text x="100" y="570" fill="#5EEAD4" font-size="26">danieltyukov.github.io/tudelft-mcp</text>
-  </g>
+  <text x="100" y="330" fill="#141414" font-family="'Iowan Old Style','Palatino Linotype',Georgia,serif" font-size="72">Your TU Delft courses,</text>
+  <text x="100" y="410" fill="#141414" font-family="'Iowan Old Style','Palatino Linotype',Georgia,serif" font-size="72">in your AI assistant.</text>
+  <text x="100" y="500" fill="#5B5A56" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="28">Brightspace, OSIRIS, MyTimetable and the Study Guide over MCP. Local. One sign-in.</text>
+  <text x="100" y="560" fill="#00A6D6" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="26">danieltyukov.github.io/tudelft-mcp</text>
 </svg>

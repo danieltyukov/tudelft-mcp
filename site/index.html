@@ -4,289 +4,135 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>tudelft-mcp</title>
-  <meta name="description" content="A local MCP server that connects Claude, ChatGPT, Cursor and other assistants to a TU Delft student's Brightspace courses, OSIRIS records, MyTimetable schedule and the Study Guide. One browser sign-in, nothing leaves your machine.">
-  <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0B1220">
-  <link rel="canonical" href="https://danieltyukov.github.io/tudelft-mcp/">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css">
-  <meta property="og:type" content="website">
+  <meta name="description" content="A local MCP server that connects Claude, ChatGPT, Cursor and other assistants to a TU Delft student's Brightspace, OSIRIS, MyTimetable and the Study Guide, after one browser sign-in.">
+  <meta name="color-scheme" content="light dark">
   <meta property="og:title" content="tudelft-mcp">
-  <meta property="og:description" content="Your TU Delft courses, in your AI assistant. Brightspace, OSIRIS, MyTimetable and the Study Guide over MCP. Runs locally, one browser sign-in.">
-  <meta property="og:url" content="https://danieltyukov.github.io/tudelft-mcp/">
+  <meta property="og:description" content="Your TU Delft courses, in your AI assistant. Brightspace, OSIRIS, MyTimetable and the Study Guide over MCP. Local, one sign-in.">
   <meta property="og:image" content="https://danieltyukov.github.io/tudelft-mcp/og.svg">
-  <meta property="og:image:type" content="image/svg+xml">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="tudelft-mcp">
-  <meta name="twitter:description" content="Your TU Delft courses, in your AI assistant. Runs locally, one browser sign-in.">
-  <meta name="twitter:image" content="https://danieltyukov.github.io/tudelft-mcp/og.svg">
+  <meta property="og:url" content="https://danieltyukov.github.io/tudelft-mcp/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-
-  <header class="top">
-    <div class="wrap top-row">
-      <a class="brand" href="./">
-        <img src="logo-mark.svg" alt="" width="28" height="28">
-        <span>tudelft-mcp</span>
-      </a>
-      <nav aria-label="Project links">
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./"><img src="logo-mark.svg" alt=""> tudelft-mcp</a>
+      <nav class="links">
         <a href="https://github.com/danieltyukov/tudelft-mcp">GitHub</a>
         <a href="https://github.com/danieltyukov/tudelft-mcp/tree/main/docs">Docs</a>
         <a href="https://www.npmjs.com/package/tudelft-mcp">npm</a>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main id="main">
-    <section class="hero">
-      <div class="wrap">
-        <h1>Your TU Delft courses, in your AI assistant.</h1>
-        <p class="lead">tudelft-mcp is a local MCP server that connects Claude, ChatGPT, Cursor and other assistants to your Brightspace courses, your official OSIRIS records, your MyTimetable schedule and the public Study Guide, after one sign-in in your own browser.</p>
+    <div class="hero">
+      <h1>Your TU Delft courses, <em>in your AI assistant.</em></h1>
+      <p class="lead">tudelft-mcp is a small server that runs on your own computer. It gives Claude, ChatGPT, Cursor, Codex and any other MCP client access to your Brightspace courses, your official OSIRIS records, your MyTimetable schedule and the public Study Guide. You sign in once, in your own browser.</p>
 
-        <div class="install">
-          <input type="radio" name="os" id="os-unix" checked>
-          <input type="radio" name="os" id="os-win">
-          <input type="radio" name="os" id="os-npm">
-          <div class="tabs">
-            <label for="os-unix">macOS / Linux</label>
-            <label for="os-win">Windows</label>
-            <label for="os-npm">npm</label>
-          </div>
-          <div class="panel panel-unix">
-            <pre><code>curl -fsSL https://danieltyukov.github.io/tudelft-mcp/install.sh | sh</code></pre>
-            <button type="button" class="copy" data-copy hidden>Copy</button>
-          </div>
-          <div class="panel panel-win">
-            <pre><code>irm https://danieltyukov.github.io/tudelft-mcp/install.ps1 | iex</code></pre>
-            <button type="button" class="copy" data-copy hidden>Copy</button>
-          </div>
-          <div class="panel panel-npm">
-            <pre><code>npm install -g tudelft-mcp &amp;&amp; tudelft-mcp setup &amp;&amp; tudelft-mcp login</code></pre>
-            <button type="button" class="copy" data-copy hidden>Copy</button>
-          </div>
+      <div class="install">
+        <input type="radio" name="t" id="t-unix" checked>
+        <input type="radio" name="t" id="t-win">
+        <input type="radio" name="t" id="t-npm">
+        <div class="tabs">
+          <label for="t-unix">macOS / Linux</label>
+          <label for="t-win">Windows</label>
+          <label for="t-npm">npm</label>
         </div>
-        <p class="clients">Works with Claude Desktop, Claude Code, ChatGPT, Codex, Cursor, VS Code, Windsurf, Zed, Gemini CLI.</p>
+        <div class="panel p-unix"><pre><code>curl -fsSL https://danieltyukov.github.io/tudelft-mcp/install.sh | sh</code></pre><button class="copy" type="button">Copy</button></div>
+        <div class="panel p-win"><pre><code>irm https://danieltyukov.github.io/tudelft-mcp/install.ps1 | iex</code></pre><button class="copy" type="button">Copy</button></div>
+        <div class="panel p-npm"><pre><code>npm install -g tudelft-mcp &amp;&amp; tudelft-mcp setup &amp;&amp; tudelft-mcp login</code></pre><button class="copy" type="button">Copy</button></div>
       </div>
-    </section>
+      <p class="note">Node 20 or newer and a Chromium-based browser. Works with Claude Desktop, Claude Code, ChatGPT, Codex, Cursor, VS Code, Windsurf, Zed and Gemini CLI.</p>
+    </div>
 
     <section id="how">
-      <div class="wrap">
-        <h2>How it works</h2>
-        <ol class="steps">
-          <li>
-            <h3>Install</h3>
-            <p>One command installs the package and writes the MCP config for the clients it finds on your machine. Node 20 or newer and a Chromium-based browser are all it needs.</p>
-          </li>
-          <li>
-            <h3>Sign in once in a browser window</h3>
-            <p>Your usual browser opens on the university login page. Enter your password and MFA there, as you always do. Brightspace, OSIRIS and MyTimetable connect in that same window.</p>
-          </li>
-          <li>
-            <h3>Ask your assistant</h3>
-            <p>Open Claude, ChatGPT or your editor and ask about your courses. The session renews itself in the background for as long as the university session lasts.</p>
-          </li>
-        </ol>
-        <p class="note">Everything stays on the machine. The session, downloaded files and the search index live in <code>~/.tudelft-mcp</code>. There is no hosted backend.</p>
-      </div>
+      <span class="eyebrow">How it works</span>
+      <ol class="steps">
+        <li><b>Install</b><span>One command installs the package and writes the MCP configuration for the clients it finds on your machine.</span></li>
+        <li><b>Sign in once</b><span>Your usual browser opens the university login page. You type your password and MFA there, as always. Brightspace, OSIRIS and MyTimetable connect in that same window.</span></li>
+        <li><b>Ask</b><span>Open Claude, ChatGPT or your editor and ask about your courses. The session renews itself in the background for as long as the university session lasts.</span></li>
+      </ol>
+      <p>Everything stays on your machine: the session, downloaded files and the search index live in <code>~/.tudelft-mcp</code>. There is no hosted backend and no account with anyone but the university.</p>
     </section>
 
     <section id="ask">
-      <div class="wrap">
-        <h2>What you can ask</h2>
-        <div class="prompts">
-          <blockquote>What is due this week across my courses?</blockquote>
-          <blockquote>Summarise the lecture slides for week 3 of EE4109.</blockquote>
-          <blockquote>What changed in my courses since yesterday?</blockquote>
-          <blockquote>Show my official OSIRIS grades and my weighted average.</blockquote>
-          <blockquote>What is my timetable for tomorrow, and where are the rooms?</blockquote>
-          <blockquote>Find the section about Nyquist stability in my course materials.</blockquote>
-          <blockquote>Preview a submission of report.pdf to the assignment.</blockquote>
-          <blockquote>Read the Study Guide entry for CESE4040.</blockquote>
-        </div>
-      </div>
+      <span class="eyebrow">Things people ask it</span>
+      <ul class="ask">
+        <li>What is due this week across my courses?</li>
+        <li>Summarise the lecture slides for week 3 of EE4109.</li>
+        <li>What changed in my courses since yesterday?</li>
+        <li>Show my official OSIRIS grades and my weighted average.</li>
+        <li>Where is my next lecture, and when does it start?</li>
+        <li>Find the part about Nyquist stability in my course materials.</li>
+        <li>Preview a submission of report.pdf to the assignment.</li>
+        <li>Read the Study Guide entry for CESE4040.</li>
+      </ul>
     </section>
 
     <section id="features">
-      <div class="wrap">
-        <h2>Features</h2>
-        <div class="features">
-          <div>
-            <h3>Brightspace</h3>
-            <ul>
-              <li>Courses, content tree and announcements with attachments.</li>
-              <li>Read slides, PDFs, Word, PowerPoint, Excel, notebooks and captions in place with <code>read_material</code>.</li>
-              <li>Assignments, your submissions and feedback files; grades and the calendar.</li>
-              <li>Quizzes, checklists, discussions, groups, locker files and recordings.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>OSIRIS</h3>
-            <ul>
-              <li>Official grades and weighted average with <code>osiris_grades</code>.</li>
-              <li>Study progress, programme structure and current registrations.</li>
-              <li>Course catalogue search, course details and exam opportunities.</li>
-              <li>Course and exam registration, previewed before it is sent.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>MyTimetable</h3>
-            <ul>
-              <li><code>get_timetable</code> for any window up to 93 days.</li>
-              <li>Rooms, cancellations, UTC and Amsterdam local time on every event.</li>
-              <li>Uses your personal calendar feed; the feed URL is never returned to the model.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Study Guide and campus</h3>
-            <ul>
-              <li>Search and read course descriptions without signing in.</li>
-              <li>Study spaces, rooms, campus software and ICT notices.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Local search and change tracking</h3>
-            <ul>
-              <li><code>sync_course</code> downloads and indexes every file in a course, resumably.</li>
-              <li><code>search_materials</code> runs a BM25 search over the index on disk.</li>
-              <li><code>whats_new</code> reports announcements, files, due dates and grades that changed since the last check.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Safe write actions</h3>
-            <ul>
-              <li>Every write is two tools: <code>prepare_*</code> returns an exact preview and a one-use token that expires in five minutes; <code>confirm_*</code> sends the request once.</li>
-              <li>Covers assignment submission, group join, discussion reply and OSIRIS registration.</li>
-              <li>An uncertain outcome is reported, never retried.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <span class="eyebrow">What it covers</span>
+      <dl class="features">
+        <div><dt>Brightspace</dt><dd>Courses, content, announcements with attachments, assignments with your submissions and feedback, grades, calendar, quizzes, checklists, discussions, groups, locker files and lecture recording links. Slides, PDFs, Word, PowerPoint, Excel and notebooks are read in place.</dd></div>
+        <div><dt>OSIRIS</dt><dd>Official grades with a weighted average, study progress and programme structure, current registrations, catalogue search, course and exam details, and course or exam registration previewed before it is sent.</dd></div>
+        <div><dt>MyTimetable</dt><dd>Your personal schedule for any window up to 93 days with rooms, cancellations, UTC and Amsterdam local time, read from your own calendar feed. The feed URL is never shown to the model.</dd></div>
+        <div><dt>Study Guide and campus</dt><dd>Course descriptions, learning objectives and assessment without signing in, plus study spaces, teaching rooms, campus software and ICT notices.</dd></div>
+        <div><dt>Search and change tracking</dt><dd><code>sync_course</code> indexes every file in a course; <code>search_materials</code> searches it; <code>whats_new</code> reports what changed since you last looked.</dd></div>
+        <div><dt>Write actions, carefully</dt><dd>Every write is a <code>prepare_*</code> tool that returns an exact preview and a one-use token, followed by a <code>confirm_*</code> tool. Nothing is submitted, joined, posted or registered without your approval of that preview.</dd></div>
+      </dl>
     </section>
 
     <section id="compare">
-      <div class="wrap">
-        <h2>Compared with the original</h2>
-        <p>tudelft-mcp started as a rewrite of the earlier my-tudelft-mcp project, which mapped the university APIs first. The differences are in how it installs and stays signed in.</p>
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">The earlier my-tudelft-mcp project</th>
-                <th scope="col">tudelft-mcp</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Install</th>
-                <td>git clone plus a 300 MB Chromium download</td>
-                <td>One command, using the browser already installed</td>
-              </tr>
-              <tr>
-                <th scope="row">Sign-in</th>
-                <td>Three separate logins</td>
-                <td>One login in one window</td>
-              </tr>
-              <tr>
-                <th scope="row">Renewal</th>
-                <td>Each service refreshed on its own</td>
-                <td>Session refresh from a shared browser profile, for as long as the university session lasts</td>
-              </tr>
-              <tr>
-                <th scope="row">Clients</th>
-                <td>Codex first</td>
-                <td>Every MCP client, including ChatGPT over HTTP</td>
-              </tr>
-              <tr>
-                <th scope="row">Search index</th>
-                <td>SQLite through an experimental Node module</td>
-                <td>Plain JSON index, no native modules</td>
-              </tr>
-              <tr>
-                <th scope="row">Tool count</th>
-                <td>84</td>
-                <td>66, with fewer duplicates</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <span class="eyebrow">Compared with the earlier project</span>
+      <p>tudelft-mcp started as a rewrite of the earlier my-tudelft-mcp project, which mapped the university APIs first. The differences are mostly in how it installs and stays signed in.</p>
+      <table>
+        <thead><tr><th></th><th>my-tudelft-mcp</th><th>tudelft-mcp</th></tr></thead>
+        <tbody>
+          <tr><td>Install</td><td>git clone plus a 300 MB Chromium download</td><td>One command, using the browser already installed</td></tr>
+          <tr><td>Sign-in</td><td>Three separate logins</td><td>One login in one window</td></tr>
+          <tr><td>Renewal</td><td>Each service refreshed on its own</td><td>Silent renewal from a shared profile, verified live</td></tr>
+          <tr><td>Clients</td><td>Codex first</td><td>Every MCP client, including ChatGPT over HTTP</td></tr>
+          <tr><td>Search index</td><td>SQLite through an experimental Node module</td><td>Plain JSON index, no native modules</td></tr>
+          <tr><td>Tools</td><td>84</td><td>66, with fewer duplicates</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <section id="privacy">
-      <div class="wrap">
-        <h2>Privacy</h2>
-        <ul class="plain">
-          <li>Runs only on your machine. There is no server in between you and the university.</li>
-          <li>Cookies, tokens and the calendar feed URL are never returned to the model. Query strings that look like credentials are stripped from every link.</li>
-          <li>Your password and MFA are typed only in the university's own login page, inside the browser window.</li>
-          <li>Downloads and the search index live under <code>~/.tudelft-mcp</code>, readable by your user account only.</li>
-          <li><code>tudelft-mcp logout</code> removes the saved sessions and the browser profile.</li>
-        </ul>
-      </div>
+      <span class="eyebrow">Privacy</span>
+      <ul class="plain">
+        <li>Runs locally only. Nothing is sent anywhere except to the university's own services.</li>
+        <li>Cookies, tokens and the calendar feed URL never appear in tool output.</li>
+        <li>Your password and MFA are typed only in the university's own login page.</li>
+        <li>Downloads and the search index stay under <code>~/.tudelft-mcp</code> with owner-only permissions.</li>
+        <li><code>tudelft-mcp logout</code> removes the saved sessions and the browser profile.</li>
+      </ul>
     </section>
 
     <section id="faq">
-      <div class="wrap">
-        <h2>Questions</h2>
-        <details>
-          <summary>Which Node version do I need?</summary>
-          <p>Node 20 or newer. The installers check for it and tell you where to get it if it is missing. Node 22 is what the project is developed and tested on.</p>
-        </details>
-        <details>
-          <summary>Which browsers work?</summary>
-          <p>Google Chrome, Microsoft Edge, Chromium or Brave, whichever is already installed. On a machine without any of them, <code>tudelft-mcp browser install</code> downloads a Chromium build. Set <code>TUDELFT_BROWSER_PATH</code> to pick a specific executable.</p>
-        </details>
-        <details>
-          <summary>Does it work on Windows?</summary>
-          <p>Yes. The PowerShell installer sets it up, and the saved session is wrapped with Windows Data Protection (DPAPI) for your user account. Claude Desktop, Cursor, VS Code, Codex and the other clients are configured the same way as on macOS and Linux.</p>
-        </details>
-        <details>
-          <summary>How do I connect ChatGPT?</summary>
-          <p>ChatGPT connects over HTTP rather than stdio. Run <code>tudelft-mcp serve --http --tunnel</code>. It starts the Streamable HTTP transport with a bearer token and, when <code>cloudflared</code> is installed, prints a public URL to paste into ChatGPT's connector settings together with the token. The desktop clients can stay connected at the same time.</p>
-        </details>
-        <details>
-          <summary>Can it submit assignments?</summary>
-          <p>Only after a preview and your explicit confirmation. <code>prepare_submission</code> returns exactly what would be sent (assignment, file, size, comment) and a token that is valid for five minutes. Nothing is uploaded until <code>confirm_submission</code> is called with that token and <code>confirmed: true</code>, and the assistant is instructed to show you the preview first. The same applies to group joins, discussion replies and OSIRIS registrations.</p>
-        </details>
-        <details>
-          <summary>Is this official?</summary>
-          <p>No. tudelft-mcp is an independent open source project and is not affiliated with or endorsed by TU Delft. It uses the same web APIs as the Brightspace, my.tudelft.nl and MyTimetable web apps, from your own account, on your own machine.</p>
-        </details>
-      </div>
+      <span class="eyebrow">Questions</span>
+      <details><summary>Which Node version do I need?</summary><p>Node 20 or newer. The installer checks and tells you where to get it.</p></details>
+      <details><summary>Which browsers work?</summary><p>Google Chrome, Microsoft Edge, Chromium or Brave, already installed. Without any of them, <code>tudelft-mcp browser install</code> downloads a Chromium build.</p></details>
+      <details><summary>Does it work on Windows?</summary><p>Yes. The session file is additionally wrapped with Windows data protection for your user account. CI runs on Windows, macOS and Linux.</p></details>
+      <details><summary>How do I connect ChatGPT?</summary><p>Run <code>tudelft-mcp serve --http --tunnel</code>. It prints a URL to paste into ChatGPT's connector settings. Desktop clients can stay connected at the same time.</p></details>
+      <details><summary>Can it submit assignments?</summary><p>Only after showing you an exact preview (files, hashes, comment, assignment) and only when you confirm that preview. The same applies to group joins, discussion posts and OSIRIS registrations.</p></details>
+      <details><summary>Is this official?</summary><p>No. It is an independent open source project and is not affiliated with TU Delft.</p></details>
     </section>
-  </main>
 
-  <footer>
-    <div class="wrap foot">
-      <p>MIT licensed. Not affiliated with TU Delft.</p>
-      <p>
-        <a href="https://github.com/danieltyukov/tudelft-mcp/issues">Report a problem</a>
-        <a href="https://github.com/danieltyukov/tudelft-mcp/blob/main/CONTRIBUTING.md">Contributing</a>
-        <a href="https://github.com/danieltyukov/tudelft-mcp">Source</a>
-      </p>
-    </div>
-  </footer>
-
+    <footer>
+      <span>MIT license</span>
+      <a href="https://github.com/danieltyukov/tudelft-mcp/issues">Issues</a>
+      <a href="https://github.com/danieltyukov/tudelft-mcp/blob/main/CONTRIBUTING.md">Contributing</a>
+      <span>Not affiliated with TU Delft.</span>
+    </footer>
+  </div>
   <script>
-    (function () {
-      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
-      document.querySelectorAll('[data-copy]').forEach(function (button) {
-        button.hidden = false;
-        button.addEventListener('click', function () {
-          var code = button.parentNode.querySelector('code');
-          navigator.clipboard.writeText(code.textContent.trim()).then(function () {
-            button.textContent = 'Copied';
-            setTimeout(function () { button.textContent = 'Copy'; }, 1500);
-          }, function () {
-            button.textContent = 'Select the text to copy';
-          });
-        });
+    for (const button of document.querySelectorAll('.copy')) {
+      button.addEventListener('click', async () => {
+        const text = button.parentElement.querySelector('code').textContent;
+        try { await navigator.clipboard.writeText(text); button.textContent = 'Copied'; }
+        catch { button.textContent = 'Select and copy'; }
+        setTimeout(() => { button.textContent = 'Copy'; }, 1500);
       });
-    })();
+    }
   </script>
 </body>
 </html>
