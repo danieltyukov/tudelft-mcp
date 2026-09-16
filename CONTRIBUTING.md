@@ -30,7 +30,7 @@ To try a change against your own account, run `npm run dev -- login` once and th
 - `src/tools/`: one file per domain (`auth.ts`, `courses.ts`, ...), each exporting a `register*Tools` function.
 - `src/brightspace/`, `src/osiris/`, `src/timetable/`, `src/public/`: HTTP clients and typed accessors per service.
 - `src/auth/`: browser detection, the persistent profile, the session store and the sign-in flow.
-- `src/documents/`, `src/index/`, `src/changes/`: text extraction, local search index, change snapshots.
+- `src/documents/`, `src/index/`: text extraction and the local search index. Change snapshots live in `src/brightspace/changes.ts`.
 - `docs/architecture.md` explains how a tool call flows through these modules.
 
 ## Adding a tool
