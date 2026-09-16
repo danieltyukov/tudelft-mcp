@@ -37,3 +37,13 @@ describe('parseCourse', () => {
     ).toBe(true);
   });
 });
+
+describe('parseCourse codes', () => {
+  it('accepts codes with a single digit before letters', () => {
+    const course = parseCourse({
+      OrgUnit: { Id: 5, Name: 'Transistor Circuits', Code: 'EE2C1+2026+1' },
+      Access: { IsActive: true, CanAccess: true },
+    });
+    expect(course).toMatchObject({ courseCode: 'EE2C1', academicYear: '2026-2027', period: 'Q1' });
+  });
+});

@@ -9,6 +9,7 @@ import { registerGradeTools } from './grades.js';
 import { registerPlanningTools } from './planning.js';
 import { registerDiscussionTools } from './discussions.js';
 import { registerSearchTools } from './search.js';
+import { registerCatalogTools } from './catalog.js';
 import { registerOsirisTools } from './osiris.js';
 import { registerTimetableTools } from './timetable.js';
 import { registerExamTools } from './exams.js';
@@ -29,6 +30,7 @@ export function registerAllTools(reg: ToolRegistry, ctx: AppContext): void {
   registerPlanningTools(reg, ctx);
   registerDiscussionTools(reg, ctx);
   registerSearchTools(reg, ctx);
+  registerCatalogTools(reg, ctx);
   registerOsirisTools(reg, ctx);
   registerTimetableTools(reg, ctx);
   registerExamTools(reg, ctx);

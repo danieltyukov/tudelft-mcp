@@ -21,7 +21,7 @@ export interface Course {
   isOrganisation: boolean;
 }
 
-const CODE = /^([A-Z]{2,6}\d{3,5}[A-Z0-9-]*)\+(\d{4})\+(\d{1,2})$/i;
+const CODE = /^([A-Z]{2,6}\d[A-Z0-9-]*)\+(\d{4})\+(\d{1,2})$/i;
 
 export function parseCourse(item: unknown): Course | undefined {
   const row = record(item);

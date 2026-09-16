@@ -2,7 +2,7 @@
 
 Generated from the registered tool definitions by `npm run docs:tools`. Do not edit by hand; change the tool file under `src/tools/` and regenerate.
 
-63 tools.
+66 tools.
 
 | Tool | Summary |
 | --- | --- |
@@ -45,6 +45,9 @@ Generated from the registered tool definitions by `npm run docs:tools`. Do not e
 | [`get_sync_status`](#get_sync_status) | Progress of a background index job, or the recent jobs when jobId is omitted. |
 | [`index_status`](#index_status) | What the local search index contains, per course and kind. |
 | [`clear_index`](#clear_index) | Remove indexed text for one course or everything. |
+| [`search_catalog`](#search_catalog) | Search the Brightspace Discover catalogue (courses you can self-enrol in for Brightspace access) by name or code. |
+| [`prepare_course_enrollment`](#prepare_course_enrollment) | Read a Discover course page (title, code, semester, description) and return a one-use preview token if self-enrolment is offered. |
+| [`confirm_course_enrollment`](#confirm_course_enrollment) | Enrol in the previewed Discover course exactly once after the student explicitly approved it, then verify membership through the API. |
 | [`osiris_status`](#osiris_status) | Check whether OSIRIS (my.tudelft.nl) is connected and verify the saved session against the live API. |
 | [`osiris_grades`](#osiris_grades) | Official results (grades) registered in OSIRIS, newest first, with course code, assessment, result, weight and dates. |
 | [`osiris_progress`](#osiris_progress) | Study progress per programme from OSIRIS (credits obtained, programme ids). |
@@ -607,6 +610,43 @@ Annotations: may write, destructive, not idempotent, talks to the university.
 | Input | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | `courseId` | string | no |  | Course id from list_courses, or a course code such as EE4109. |
+
+## search_catalog
+
+**Search the course catalogue**
+
+Search the Brightspace Discover catalogue (courses you can self-enrol in for Brightspace access) by name or code. Uses the signed-in headless browser. Discover enrolment is not an OSIRIS course registration.
+
+Annotations: read-only, idempotent, talks to the university.
+
+| Input | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| `query` | string | yes |  |  |
+
+## prepare_course_enrollment
+
+**Preview Brightspace enrolment**
+
+Read a Discover course page (title, code, semester, description) and return a one-use preview token if self-enrolment is offered. Nothing is changed.
+
+Annotations: read-only, idempotent, talks to the university.
+
+| Input | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| `courseId` | string | yes |  | Discover course id from search_catalog from another tool. |
+
+## confirm_course_enrollment
+
+**Enrol (after approval)**
+
+Enrol in the previewed Discover course exactly once after the student explicitly approved it, then verify membership through the API.
+
+Annotations: may write, not idempotent, talks to the university.
+
+| Input | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| `confirmationToken` | string | yes |  |  |
+| `confirmed` | true | yes |  | Must be true. Confirms the student approved the exact preview. |
 
 ## osiris_status
 
