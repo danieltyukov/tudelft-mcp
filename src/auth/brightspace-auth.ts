@@ -210,7 +210,10 @@ export async function captureBrightspace(
   debug(
     `captured cookies: ${cookies.map((c) => `${c.domain}:${c.name}${c.expires < 0 ? '' : '(p)'}`).join(' ')}`,
   );
+  const userAgent = await page.evaluate(() => navigator.userAgent).catch(() => undefined);
   const session: BrightspaceSession = { origin, cookies, identity, savedAt: new Date().toISOString() };
+  if (typeof userAgent === 'string' && userAgent)
+    session.userAgent = userAgent.replace(/HeadlessChrome/, 'Chrome');
   if (material.xsrf) session.xsrf = material.xsrf;
   if (bearer) session.bearer = bearer;
   return session;

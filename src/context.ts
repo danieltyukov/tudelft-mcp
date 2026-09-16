@@ -81,6 +81,7 @@ export function createContext(config: Config = loadConfig()): AppContext {
     }
   };
 
+  browser.userAgentSeed = async () => (await session.load()).brightspace?.userAgent;
   browser.cookieSeed = async () => {
     const data = await session.load();
     return [...(data.brightspace?.cookies ?? []), ...(data.osiris?.cookies ?? [])];

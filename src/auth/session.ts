@@ -27,6 +27,8 @@ export interface Identity {
 export interface BrightspaceSession {
   origin: string;
   cookies: Cookie[];
+  /** User agent of the headed sign-in, reused headless so sessions look identical. */
+  userAgent?: string;
   xsrf?: string;
   bearer?: string;
   identity: Identity;

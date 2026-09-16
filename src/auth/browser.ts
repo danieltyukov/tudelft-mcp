@@ -166,6 +166,8 @@ export class BrowserManager {
   private active?: { headless: boolean; context: BrowserContext };
   /** Supplies saved cookies to seed into new contexts; set by the app context. */
   cookieSeed?: () => Promise<Cookie[]>;
+  /** User agent recorded at the headed sign-in, applied to headless launches. */
+  userAgentSeed?: () => Promise<string | undefined>;
 
   constructor(private readonly config: Config) {}
 
@@ -196,9 +198,11 @@ export class BrowserManager {
           'No Chrome, Edge, Chromium or Brave was found. Install one, or run "tudelft-mcp browser install" to download Chromium.',
         );
       }
+      const userAgent = options.headless && options.seed !== false ? await this.userAgentSeed?.() : undefined;
       const context = await chromium.launchPersistentContext(this.config.profileDir, {
         executablePath: browser.executablePath,
         headless: options.headless,
+        ...(userAgent ? { userAgent } : {}),
         viewport: options.headless ? { width: 1280, height: 900 } : null,
         locale: 'en-GB',
         timezoneId: 'Europe/Amsterdam',
