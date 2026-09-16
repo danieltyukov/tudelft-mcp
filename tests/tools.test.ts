@@ -26,7 +26,7 @@ describe('tool catalogue', () => {
       expect(names.has(expected), expected).toBe(true);
     }
     expect(registry.tools.every((tool) => tool.description.length > 40)).toBe(true);
-    expect(registry.tools.every((tool) => !/[–—]/.test(tool.description))).toBe(true);
+    expect(registry.tools.every((tool) => !/[\u2013\u2014]/.test(tool.description))).toBe(true);
     const prompts = await client.listPrompts();
     expect(prompts.prompts.map((p) => p.name)).toContain('weekly_briefing');
     const resources = await client.listResources();
