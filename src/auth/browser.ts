@@ -150,7 +150,7 @@ export function seedableCookies(...lists: Cookie[][]): Cookie[] {
   for (const list of lists) {
     for (const cookie of list) {
       if (cookie.expires > 0 && cookie.expires < now) continue;
-      if (!cookie.name || !cookie.domain) continue;
+      if (!cookie.name || !cookie.domain || cookie.name === 'ShibbolethSSO') continue;
       merged.set(`${cookie.domain}|${cookie.path}|${cookie.name}`, cookie);
     }
   }
@@ -212,6 +212,10 @@ export class BrowserManager {
       });
       this.active = { headless: options.headless, context };
       try {
+        // Brightspace leaves a persistent ShibbolethSSO cookie that makes the next sign-in
+        // skip SURFconext and post an unsolicited response there ("session lost"). Drop it so
+        // every sign-in starts as a normal SP-initiated flow.
+        await context.clearCookies({ name: 'ShibbolethSSO' }).catch(() => undefined);
         if (options.seed !== false && this.cookieSeed) {
           // A visible sign-in only reuses Brightspace's own cookies (a still valid session skips
           // the IdP); everything else is left to the real sign-in so SURFconext starts clean.
