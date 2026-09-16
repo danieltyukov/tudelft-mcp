@@ -213,7 +213,12 @@ export class BrowserManager {
       this.active = { headless: options.headless, context };
       try {
         if (options.seed !== false && this.cookieSeed) {
-          const cookies = seedableCookies(await this.cookieSeed());
+          // A visible sign-in only reuses Brightspace's own cookies (a still valid session skips
+          // the IdP); everything else is left to the real sign-in so SURFconext starts clean.
+          const all = seedableCookies(await this.cookieSeed());
+          const cookies = options.headless
+            ? all
+            : all.filter((cookie) => cookie.domain.endsWith('brightspace.tudelft.nl'));
           if (cookies.length) await context.addCookies(cookies).catch(() => undefined);
         }
         return await task(context);

@@ -100,6 +100,12 @@ export async function waitForBrightspace(page: Page, origin: string, options: Wa
         'The university asks for a password or MFA. Run "tudelft-mcp login" once to sign in again.',
       );
     }
+    if (/engine\.surfconext\.nl\/authentication\/feedback\/session-lost/.test(url)) {
+      throw new TudelftError(
+        'LOGIN_CANCELLED',
+        'SURFconext lost the sign-in session, which happens when the login window stays open for a long time before the password is entered. Run "tudelft-mcp login" again and finish it within a few minutes.',
+      );
+    }
     if (/engine\.surfconext\.nl\/authentication\/sp\/consume-assertion/.test(url)) {
       const text = await page
         .evaluate(() => (document.body?.innerText ?? '').slice(0, 20_000))

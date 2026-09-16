@@ -67,6 +67,10 @@ export async function runLogin(ctx: AppContext, options: LoginOptions, log: Logg
       };
       log(`Brightspace connected as ${captured.identity.name || captured.identity.uniqueName}.`);
     } catch (error) {
+      if (!(error instanceof TudelftError))
+        debug(
+          `Brightspace login error: ${error instanceof Error ? `${error.name}: ${error.message}` : String(error)}`,
+        );
       report.brightspace = { connected: false, error: toSafeError(error) };
       log(`Brightspace sign-in failed: ${toSafeError(error).message}`);
       return;
