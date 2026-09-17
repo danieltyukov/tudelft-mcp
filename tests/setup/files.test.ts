@@ -1,5 +1,8 @@
+import { chmod, mkdtemp, readFile, stat, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { replaceTomlSection, setNested } from '../../src/setup/files.js';
+import { replaceTomlSection, setNested, writeWithBackup } from '../../src/setup/files.js';
 
 const body = 'command = "tudelft-mcp"\nargs = ["serve"]';
 const header = '[mcp_servers.tudelft]';
@@ -45,5 +48,33 @@ describe('setNested', () => {
     expect(setNested({ mcpServers: 'oops' }, ['mcpServers', 'tudelft'], 1)).toEqual({
       mcpServers: { tudelft: 1 },
     });
+  });
+});
+
+describe('writeWithBackup', () => {
+  const mode = async (path: string): Promise<number> => (await stat(path)).mode & 0o777;
+
+  it('gives the backup the same permissions as the original file', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'tudelft-files-'));
+    const path = join(dir, 'config.json');
+    await writeFile(path, 'old');
+    await chmod(path, 0o600);
+    const result = await writeWithBackup(path, 'new', false);
+    expect(result).toEqual({ changed: true, backup: `${path}.bak` });
+    expect(await readFile(`${path}.bak`, 'utf8')).toBe('old');
+    expect(await readFile(path, 'utf8')).toBe('new');
+    expect(await mode(`${path}.bak`)).toBe(await mode(path));
+  });
+
+  it('fixes the permissions of a backup left over from an earlier run', async () => {
+    const dir = await mkdtemp(join(tmpdir(), 'tudelft-files-'));
+    const path = join(dir, 'config.json');
+    await writeFile(path, 'old');
+    await chmod(path, 0o600);
+    await writeFile(`${path}.bak`, 'stale');
+    await chmod(`${path}.bak`, 0o644);
+    await writeWithBackup(path, 'new', false);
+    expect(await readFile(`${path}.bak`, 'utf8')).toBe('old');
+    expect(await mode(`${path}.bak`)).toBe(await mode(path));
   });
 });

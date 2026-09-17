@@ -1,7 +1,6 @@
 import { spawn } from 'node:child_process';
-import { writeFile } from 'node:fs/promises';
 import type { ServerEntry } from './command.js';
-import { mergeJsonFile, mergeTomlSection, readText, type FileChange } from './files.js';
+import { mergeJsonFile, mergeTomlSection, readText, type FileChange, writeBackup } from './files.js';
 import {
   appDataDir,
   dotConfigDir,
@@ -117,7 +116,7 @@ function claudeCode(setup: SetupEnv): ClientDefinition {
       const changed = before !== after;
       if (changed && before !== undefined) {
         const backup = `${configPath}.bak`;
-        await writeFile(backup, before, 'utf8');
+        await writeBackup(configPath, backup, before);
         return { changed, path: configPath, preview, backup };
       }
       return { changed, path: configPath, preview };
