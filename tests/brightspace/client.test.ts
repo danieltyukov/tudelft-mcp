@@ -122,6 +122,7 @@ describe('BrightspaceClient', () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
       const url = String(input);
       if (url.endsWith('/d2l/api/versions/')) return json(versions);
+      if (url.endsWith('/users/whoami')) return json({ Identifier: '1' });
       if (url.includes('flaky'))
         return ++attempts < 2 ? new Response('', { status: 503 }) : json({ ok: true });
       if (url.includes('forbidden')) return new Response('', { status: 403 });
@@ -164,6 +165,21 @@ describe('403 handling', () => {
     expect(await client.get('lp', 'users/whoami')).toEqual({ Identifier: '1' });
     expect(renewals).toBe(1);
     await expect(client.get('lp', 'courses/5')).rejects.toMatchObject({ code: 'PERMISSION_DENIED' });
+    expect(renewals).toBe(1);
+  });
+
+  it('reports AUTH_REQUIRED when a 403 comes with a dead session and renewal fails', async () => {
+    let renewals = 0;
+    const { client } = await makeClient(async () => {
+      renewals++;
+      return false;
+    });
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.endsWith('/d2l/api/versions/')) return json(versions);
+      return new Response('', { status: 403 });
+    });
+    await expect(client.get('lp', 'users/whoami')).rejects.toMatchObject({ code: 'AUTH_REQUIRED' });
     expect(renewals).toBe(1);
   });
 });
