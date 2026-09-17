@@ -181,7 +181,13 @@ export class BrightspaceClient {
         // denial. Probe the session cheaply before deciding which one this is.
         await response.body?.cancel().catch(() => undefined);
         renewed = true;
-        if (!(await this.sessionAlive(session)) && (await this.renew())) continue;
+        if (!(await this.sessionAlive(session))) {
+          if (await this.renew()) continue;
+          throw new TudelftError(
+            'AUTH_REQUIRED',
+            'The Brightspace session has expired and could not be renewed silently. Run "tudelft-mcp login".',
+          );
+        }
         throw new TudelftError('PERMISSION_DENIED', 'Brightspace does not allow this account to read that.', {
           status: 403,
         });

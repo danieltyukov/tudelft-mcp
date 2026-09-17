@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- A 403 from Brightspace while the university session has expired and cannot be renewed silently is reported as `AUTH_REQUIRED` with a hint to run `tudelft-mcp login`, instead of `PERMISSION_DENIED`.
+- `tudelft-mcp setup` gives the `.bak` copy of a config file the same permissions as the original, so an owner-only config no longer gets a world-readable backup.
+
 ## [0.1.1] - 2026-09-16
 
 ### Fixed

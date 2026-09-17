@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { chmod, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 
 export type JsonObject = Record<string, unknown>;
@@ -54,6 +54,14 @@ export function setNested(doc: JsonObject, keys: string[], value: unknown): Json
   return root;
 }
 
+/** Save `content`, the current text of `original`, as `backup` with the same permissions as the original. */
+export async function writeBackup(original: string, backup: string, content: string): Promise<void> {
+  const mode = (await stat(original)).mode & 0o7777;
+  await writeFile(backup, content, { encoding: 'utf8', mode });
+  // writeFile applies `mode` only when it creates the file, and through the umask; set it exactly.
+  await chmod(backup, mode);
+}
+
 /** Write `next` when it differs from the current content, saving the previous version as <path>.bak. */
 export async function writeWithBackup(path: string, next: string, dryRun: boolean): Promise<WriteOutcome> {
   const current = await readText(path);
@@ -63,7 +71,7 @@ export async function writeWithBackup(path: string, next: string, dryRun: boolea
   let backup: string | undefined;
   if (current !== undefined) {
     backup = `${path}.bak`;
-    await writeFile(backup, current, 'utf8');
+    await writeBackup(path, backup, current);
   }
   await writeFile(path, next, 'utf8');
   return backup ? { changed: true, backup } : { changed: true };
