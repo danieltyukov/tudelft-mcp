@@ -35,7 +35,7 @@ jobs:
           mv tudelft-mcp-*.tgz tudelft-mcp.tgz
           tar -tzf tudelft-mcp.tgz | head -20
       - name: Create the GitHub release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: tudelft-mcp.tgz
           generate_release_notes: true
