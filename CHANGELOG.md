@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-01
+
+### Security
+
+- `@modelcontextprotocol/sdk` 1.30.1: the Streamable HTTP transport behind `serve --http` now reads request bodies with a size limit and caps the length of JSON-RPC batches.
+- `mammoth` 1.13.0 for DOCX text extraction. This release uses native promises instead of bluebird and escapes its Markdown output more strictly. tudelft-mcp only calls the raw-text extractor.
+
 ### Fixed
 
 - A 403 from Brightspace while the university session has expired and cannot be renewed silently is reported as `AUTH_REQUIRED` with a hint to run `tudelft-mcp login`, instead of `PERMISSION_DENIED`.
@@ -42,6 +49,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Static site, README, contributor documentation, generated tool reference (`npm run docs:tools`).
 - CI on Ubuntu, macOS and Windows with Node 20 and 22; release, Pages and CodeQL workflows.
 
-[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/danieltyukov/tudelft-mcp/releases/tag/v0.1.0
