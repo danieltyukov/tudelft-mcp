@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-10-01
+
+### Changed
+
+- Releases are published to npm from GitHub Actions with trusted publishing, so every version carries a provenance attestation and no npm token is stored in the repository.
+- README: the npm install line no longer runs `login` twice, the setup example names the client instead of using a `--client` flag that does not exist, and the config for running through `npx` without a global install is documented.
+
 ## [0.1.2] - 2026-10-01
 
 ### Security
@@ -49,7 +56,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Static site, README, contributor documentation, generated tool reference (`npm run docs:tools`).
 - CI on Ubuntu, macOS and Windows with Node 20 and 22; release, Pages and CodeQL workflows.
 
-[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/danieltyukov/tudelft-mcp/releases/tag/v0.1.0

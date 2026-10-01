@@ -40,12 +40,9 @@ jobs:
           files: tudelft-mcp.tgz
           generate_release_notes: true
           prerelease: ${{ contains(github.ref_name, '-') }}
+      # Trusted publishing: npm accepts this workflow's OIDC token, so no npm token is stored as a
+      # secret. It needs npm 11.5.1 or newer, which is newer than the npm that ships with Node 22.
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::notice::NPM_TOKEN is not set; the GitHub release was created but nothing was published to npm."
-            exit 0
-          fi
+          npm install -g npm@11
           npm publish --provenance --access public
