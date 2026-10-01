@@ -41,7 +41,7 @@ irm https://danieltyukov.github.io/tudelft-mcp/install.ps1 | iex
 With npm on any platform:
 
 ```sh
-npm install -g tudelft-mcp && tudelft-mcp setup && tudelft-mcp login
+npm install -g tudelft-mcp && tudelft-mcp setup
 ```
 
 Then sign in once:
@@ -54,7 +54,22 @@ A browser window opens on the university login page. Finish the sign-in there, i
 
 ### Connect a client
 
-`tudelft-mcp setup` detects the MCP clients installed on your machine and writes their config. Supported: Claude Desktop, Claude Code, Cursor, VS Code, Windsurf, Zed, Codex, Gemini CLI and Cline. Use `--dry-run` to see what it would write, or `--client <name>` for one client. Details per client are in [docs/clients.md](docs/clients.md).
+`tudelft-mcp setup` detects the MCP clients installed on your machine and writes their config. Supported: Claude Desktop, Claude Code, Cursor, VS Code, Windsurf, Zed, Codex, Gemini CLI and Cline. Use `--dry-run` to see what it would write, or name the clients to configure, for example `tudelft-mcp setup cursor`. Details per client are in [docs/clients.md](docs/clients.md).
+
+To run it without a global install, sign in with `npx -y tudelft-mcp login` and point the client at npx:
+
+```json
+{
+  "mcpServers": {
+    "tudelft": {
+      "command": "npx",
+      "args": ["-y", "tudelft-mcp", "serve"]
+    }
+  }
+}
+```
+
+`tudelft-mcp setup --command npx` writes this entry for you.
 
 ChatGPT connects over HTTP instead of stdio:
 
