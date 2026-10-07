@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-10-07
+
+### Security
+
+- Build tooling: `source-map-js` 1.2.2, pulled in by tsup through postcss, fixes a denial of service from malicious indexed source maps (CVE-2026-93749). It only runs at build time and is not part of the published package.
+
+### Changed
+
+- The lockfile that CI tests against resolves `@modelcontextprotocol/sdk` 1.32.0 and `pdfjs-dist` 6.4.299.
+
 ## [0.1.3] - 2026-10-01
 
 ### Changed
@@ -56,7 +66,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Static site, README, contributor documentation, generated tool reference (`npm run docs:tools`).
 - CI on Ubuntu, macOS and Windows with Node 20 and 22; release, Pages and CodeQL workflows.
 
-[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/danieltyukov/tudelft-mcp/compare/v0.1.0...v0.1.1
