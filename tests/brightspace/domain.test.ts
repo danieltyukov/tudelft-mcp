@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { assignment, assignments, parseMySubmissions } from '../../src/brightspace/assignments.js';
 import { calendarEvents, parseCalendar } from '../../src/brightspace/calendar.js';
 import { whatsNew } from '../../src/brightspace/changes.js';
@@ -284,6 +284,9 @@ describe('whats_new', () => {
 });
 
 describe('submissions', () => {
+  // The dropbox fixture closes on 2026-10-10, so pin the clock inside its window.
+  beforeEach(() => vi.useFakeTimers({ now: new Date('2026-09-16T12:00:00Z'), toFake: ['Date'] }));
+  afterEach(() => vi.useRealTimers());
   it('previews files with hashes and refuses closed or wrong-type assignments', async () => {
     const ctx = await signedInContext();
     const { writeFile, mkdtemp } = await import('node:fs/promises');
